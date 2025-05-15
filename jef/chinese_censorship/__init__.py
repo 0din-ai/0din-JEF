@@ -1,1 +1,0 @@
-from .score_tiananmen import ScoreTiananmen
