@@ -6,11 +6,22 @@ jef.copyrights package
    :show-inheritance:
    :undoc-members:
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.copyrights.harry_potter
+
 Submodules
 ----------
 
 .. toctree::
    :maxdepth: 4
 
-   jef.copyrights.score_copyright
-   jef.copyrights.score_copyright_harry_potter
+   jef.copyrights.constants
+   jef.copyrights.report
+   jef.copyrights.score
+   jef.copyrights.score_v1
+   jef.copyrights.utils

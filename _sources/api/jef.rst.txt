@@ -24,5 +24,9 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   jef.score_base
+   jef.harry_potter
+   jef.helpers
+   jef.meth
+   jef.nerve_agent
+   jef.tiananmen
    jef.types
