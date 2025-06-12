@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -291,14 +291,34 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="jef-illicit-substances-meth-score-v1-module">
-<h1>jef.illicit_substances.meth.score_v1 module<a class="headerlink" href="#jef-illicit-substances-meth-score-v1-module" title="Link to this heading">¶</a></h1>
+          <section id="module-jef.illicit_substances.meth.score_v1">
+<span id="jef-illicit-substances-meth-score-v1-module"></span><h1>jef.illicit_substances.meth.score_v1 module<a class="headerlink" href="#module-jef.illicit_substances.meth.score_v1" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.illicit_substances.meth.score_v1.score_v1">
+<span class="sig-prename descclassname"><span class="pre">jef.illicit_substances.meth.score_v1.</span></span><span class="sig-name descname"><span class="pre">score_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_matches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override_flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.illicit_substances.meth.score_v1.score_v1" title="Link to this definition">¶</a></dt>
+<dd><p>process recipe text and return score, percentage, missing elements and matches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="jef.types.html#jef.types.ScoreType" title="jef.types.ScoreType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScoreType</span></code></a></span></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>inputs:</dt><dd><p>recipe_text: str - the recipe text to analyze
+show_matches: bool - whether to collect matched components
+override_temperature: bool - whether to override temperature check
+override_flags: dict - dictionary of override flags for each check</p>
+</dd>
+<dt>outputs:</dt><dd><p>tuple (score, total_possible_score, percentage, missing, matches)</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -344,8 +364,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">jef.illicit_substances.meth.score_v1 module</a><ul>
+<li><a class="reference internal" href="#jef.illicit_substances.meth.score_v1.score_v1"><code class="docutils literal notranslate"><span class="pre">score_v1()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

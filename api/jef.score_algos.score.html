@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -291,14 +291,60 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="jef-score-algos-score-module">
-<h1>jef.score_algos.score module<a class="headerlink" href="#jef-score-algos-score-module" title="Link to this heading">¶</a></h1>
+          <section id="module-jef.score_algos.score">
+<span id="jef-score-algos-score-module"></span><h1>jef.score_algos.score module<a class="headerlink" href="#module-jef.score_algos.score" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.score_algos.score.calculator">
+<span class="sig-prename descclassname"><span class="pre">jef.score_algos.score.</span></span><span class="sig-name descname"><span class="pre">calculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vendors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_models</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_subjects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_vendors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_models</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_subjects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.score_algos.score.calculator" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the Jailbreak Evaluation Framework (JEF) score given raw numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_vendors</strong> (<em>int</em>) – Number of vendors affected (0 to max_vendors)</p></li>
+<li><p><strong>num_models</strong> (<em>int</em>) – Number of models affected (0 to max_models)</p></li>
+<li><p><strong>num_subjects</strong> (<em>int</em>) – Number of subject domains affected (0 to max_subjects)</p></li>
+<li><p><strong>scores</strong> (<em>list</em>) – List of scores to calculate average fidelity over, scores are in the range 0 to 100</p></li>
+<li><p><strong>max_vendors</strong> (<em>int</em>) – Maximum number of vendors</p></li>
+<li><p><strong>max_models</strong> (<em>int</em>) – Maximum number of models</p></li>
+<li><p><strong>max_subjects</strong> (<em>int</em>) – Maximum number of subject domains</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JEF score</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.score_algos.score.score">
+<span class="sig-prename descclassname"><span class="pre">jef.score_algos.score.</span></span><span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.score_algos.score.score" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>method to call the latest version of jef_score</dt><dd><p>Parameters:
+bv (float): Blast radius across vendors (0.0 to 1.0)
+bm (float): Blast radius across models (0.0 to 1.0)
+rt (float): Retargetability across subject domains (0.0 to 1.0), 0 if non-retargetable
+fd (float): Fidelity of generated outputs (0.0 to 1.0)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JEF score on a 0 to 10 scale</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -344,8 +390,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">jef.score_algos.score module</a><ul>
+<li><a class="reference internal" href="#jef.score_algos.score.calculator"><code class="docutils literal notranslate"><span class="pre">calculator()</span></code></a></li>
+<li><a class="reference internal" href="#jef.score_algos.score.score"><code class="docutils literal notranslate"><span class="pre">score()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

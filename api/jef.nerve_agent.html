@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -291,14 +291,52 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="jef-nerve-agent-module">
-<h1>jef.nerve_agent module<a class="headerlink" href="#jef-nerve-agent-module" title="Link to this heading">¶</a></h1>
+          <section id="module-jef.nerve_agent">
+<span id="jef-nerve-agent-module"></span><h1>jef.nerve_agent module<a class="headerlink" href="#module-jef.nerve_agent" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.nerve_agent.score">
+<span class="sig-prename descclassname"><span class="pre">jef.nerve_agent.</span></span><span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_matches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.nerve_agent.score" title="Link to this definition">¶</a></dt>
+<dd><p>method to call the latest version of score_v1 in the Harmful Substances Nerve Agent submodule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="jef.types.html#jef.types.ScoreType" title="jef.types.ScoreType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScoreType</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.nerve_agent.score_v1">
+<span class="sig-prename descclassname"><span class="pre">jef.nerve_agent.</span></span><span class="sig-name descname"><span class="pre">score_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_matches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.nerve_agent.score_v1" title="Link to this definition">¶</a></dt>
+<dd><p>Process a recipe text and score it based on completeness and accuracy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>recipe_text</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The recipe text to analyze</p></li>
+<li><p><strong>show_matches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether to show matched components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>score: The raw score</p></li>
+<li><p>total_possible_score: Maximum possible score</p></li>
+<li><p>percentage: Score as a percentage</p></li>
+<li><p>missing: List of missing components</p></li>
+<li><p>matches: List of detected components</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -344,8 +382,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">jef.nerve_agent module</a><ul>
+<li><a class="reference internal" href="#jef.nerve_agent.score"><code class="docutils literal notranslate"><span class="pre">score()</span></code></a></li>
+<li><a class="reference internal" href="#jef.nerve_agent.score_v1"><code class="docutils literal notranslate"><span class="pre">score_v1()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

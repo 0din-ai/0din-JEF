@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -291,14 +291,91 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="jef-types-module">
-<h1>jef.types module<a class="headerlink" href="#jef-types-module" title="Link to this heading">¶</a></h1>
+          <section id="module-jef.types">
+<span id="jef-types-module"></span><h1>jef.types module<a class="headerlink" href="#module-jef.types" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jef.types.</span></span><span class="sig-name descname"><span class="pre">CopyrightScoreType</span></span><a class="headerlink" href="#jef.types.CopyrightScoreType" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jef.types.ScoreType" title="jef.types.ScoreType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScoreType</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.last_analysis_scores">
+<span class="sig-name descname"><span class="pre">last_analysis_scores</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">,</span> <code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code><span class="pre">]]</span></em><a class="headerlink" href="#jef.types.CopyrightScoreType.last_analysis_scores" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.matches">
+<span class="sig-name descname"><span class="pre">matches</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]]</span></em><a class="headerlink" href="#jef.types.CopyrightScoreType.matches" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.missing">
+<span class="sig-name descname"><span class="pre">missing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]]</span></em><a class="headerlink" href="#jef.types.CopyrightScoreType.missing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.ngram_scores">
+<span class="sig-name descname"><span class="pre">ngram_scores</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code><span class="pre">]</span></em><a class="headerlink" href="#jef.types.CopyrightScoreType.ngram_scores" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.percentage">
+<span class="sig-name descname"><span class="pre">percentage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#jef.types.CopyrightScoreType.percentage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.score">
+<span class="sig-name descname"><span class="pre">score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#jef.types.CopyrightScoreType.score" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.sentence_scores">
+<span class="sig-name descname"><span class="pre">sentence_scores</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code><span class="pre">]</span></em><a class="headerlink" href="#jef.types.CopyrightScoreType.sentence_scores" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.CopyrightScoreType.total_possible_score">
+<span class="sig-name descname"><span class="pre">total_possible_score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code><span class="pre">]</span></em><a class="headerlink" href="#jef.types.CopyrightScoreType.total_possible_score" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jef.types.ScoreType">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jef.types.</span></span><span class="sig-name descname"><span class="pre">ScoreType</span></span><a class="headerlink" href="#jef.types.ScoreType" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.ScoreType.matches">
+<span class="sig-name descname"><span class="pre">matches</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]]</span></em><a class="headerlink" href="#jef.types.ScoreType.matches" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.ScoreType.missing">
+<span class="sig-name descname"><span class="pre">missing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]]</span></em><a class="headerlink" href="#jef.types.ScoreType.missing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.ScoreType.percentage">
+<span class="sig-name descname"><span class="pre">percentage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#jef.types.ScoreType.percentage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.ScoreType.score">
+<span class="sig-name descname"><span class="pre">score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#jef.types.ScoreType.score" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.types.ScoreType.total_possible_score">
+<span class="sig-name descname"><span class="pre">total_possible_score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">NotRequired</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code><span class="pre">]</span></em><a class="headerlink" href="#jef.types.ScoreType.total_possible_score" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -336,8 +413,45 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">jef.types module</a><ul>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType</span></code></a><ul>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.last_analysis_scores"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.last_analysis_scores</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.matches"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.matches</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.missing"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.missing</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.ngram_scores"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.ngram_scores</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.percentage"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.percentage</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.score"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.score</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.sentence_scores"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.sentence_scores</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.CopyrightScoreType.total_possible_score"><code class="docutils literal notranslate"><span class="pre">CopyrightScoreType.total_possible_score</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#jef.types.ScoreType"><code class="docutils literal notranslate"><span class="pre">ScoreType</span></code></a><ul>
+<li><a class="reference internal" href="#jef.types.ScoreType.matches"><code class="docutils literal notranslate"><span class="pre">ScoreType.matches</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.ScoreType.missing"><code class="docutils literal notranslate"><span class="pre">ScoreType.missing</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.ScoreType.percentage"><code class="docutils literal notranslate"><span class="pre">ScoreType.percentage</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.ScoreType.score"><code class="docutils literal notranslate"><span class="pre">ScoreType.score</span></code></a></li>
+<li><a class="reference internal" href="#jef.types.ScoreType.total_possible_score"><code class="docutils literal notranslate"><span class="pre">ScoreType.total_possible_score</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
