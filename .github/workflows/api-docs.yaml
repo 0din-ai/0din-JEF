@@ -1,6 +1,14 @@
 name: Build Sphinx Docs
 
 on:
+  release:
+    types: [published]
+    # Paths to watch for triggering the workflow
+    paths:
+      - 'jef/**'
+      - 'docs/**'
+      - '.github/workflows/api-docs.yml'
+
   # allow manual triggering
   workflow_dispatch:
 
@@ -66,7 +74,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install 0din-jef sphinx sphinx_rtd_theme sphinx-autodoc-typehints furo
+        pip install sphinx sphinx_rtd_theme sphinx-autodoc-typehints furo
+        pip install git+https://github.com/0din-ai/0din-JEF.git
 
     - name: Update RST files
       run: |
