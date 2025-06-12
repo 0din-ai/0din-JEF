@@ -12,4 +12,6 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   jef.score_algos.jef_score
+   jef.score_algos.constants
+   jef.score_algos.score
+   jef.score_algos.score_v1

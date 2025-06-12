@@ -6,10 +6,10 @@ jef.harmful\_substances package
    :show-inheritance:
    :undoc-members:
 
-Submodules
-----------
+Subpackages
+-----------
 
 .. toctree::
    :maxdepth: 4
 
-   jef.harmful_substances.score_agent_1_10_recipe
+   jef.harmful_substances.nerve_agent

@@ -6,10 +6,10 @@ jef.chinese\_censorship package
    :show-inheritance:
    :undoc-members:
 
-Submodules
-----------
+Subpackages
+-----------
 
 .. toctree::
    :maxdepth: 4
 
-   jef.chinese_censorship.score_tiananmen
+   jef.chinese_censorship.tiananmen

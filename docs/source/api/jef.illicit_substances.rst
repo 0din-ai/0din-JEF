@@ -6,10 +6,10 @@ jef.illicit\_substances package
    :show-inheritance:
    :undoc-members:
 
-Submodules
-----------
+Subpackages
+-----------
 
 .. toctree::
    :maxdepth: 4
 
-   jef.illicit_substances.score_meth_recipe
+   jef.illicit_substances.meth
