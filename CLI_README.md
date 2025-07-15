@@ -81,3 +81,5 @@ python -m jef.menu_cli
 ### Fallback Mode
 
 If the `questionary` library is not installed or your terminal does not support the interactive menu, the application will automatically switch to a simplified **fallback mode**. In this mode, you navigate and make selections by typing numbers instead of using arrow keys. The user flow remains functionally the same.
+
+<img width="1008" height="1090" alt="image" src="https://github.com/user-attachments/assets/618c3d63-d419-4926-bb20-b627e6dceb29" />
