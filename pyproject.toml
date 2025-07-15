@@ -4,7 +4,7 @@ version = "0.1.5" #TODO-Update: this before each release
 description = "Jailbreak Evaluation Module"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies= []
+dependencies= ["questionary"]
 
 authors = [
     { name = "jiwu-moz" }
@@ -22,6 +22,10 @@ Repository = "https://github.com/0din-ai/0din-JEF"
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[project.scripts]
+jef = "jef.cli:main"
+jef-menu = "jef.menu_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]  # Look for packages in the current directory
