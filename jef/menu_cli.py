@@ -150,6 +150,7 @@ def score_file_interactive(file_name, file_content):
 
 
 def fallback_menu():
+    print_fallback_menu_header()
     from jef.cli_utils import print_result, print_info, print_error
     
     current_path = os.getcwd()
@@ -245,14 +246,15 @@ def score_file_fallback(file_name, file_content):
         input(f"\n{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
 
 
-def main():
-    # Print header for both modes
+def print_fallback_menu_header():
+    """Print the JEF menu header for fallback mode"""
     from jef.cli_utils import print_jef_header, print_section_header
-    
     print_jef_header()
     print_section_header("Interactive File Browser & JEF Analyzer")
     print(f"{Fore.WHITE}Navigate through files and analyze them with JEF scoring algorithms{Style.RESET_ALL}\n")
-    
+
+
+def main():
     # Simple check for non-interactive environment
     is_non_interactive = not sys.stdout.isatty()
     
@@ -267,6 +269,7 @@ def main():
         if not INTERACTIVE_MODE:
             print(f"{Fore.YELLOW}questionary library not found. Running in fallback mode.{Style.RESET_ALL}")
         fallback_menu()
+
 
 
 if __name__ == "__main__":
