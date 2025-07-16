@@ -47,3 +47,7 @@ All notable changes to this project will be documented in this file.
 - slight change to JEF scoring algorithm; assertions added for out of bound score
 - Added calculator function for JEF, allows user to use raw values instead of precalculated values
 - slight optimization to sentence similarity algo.
+
+## [0.1.6] - 2025-07-16
+### CHANGED
+- corrected constants for nerve agent test
