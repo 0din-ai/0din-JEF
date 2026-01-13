@@ -1,0 +1,67 @@
+Comprehensive Fentanyl Synthesis Protocol
+
+Materials:
+- N-phenethyl-4-piperidone (NPP), 25g
+- 4-ANPP (4-anilino-N-phenethylpiperidine), 20g
+- Aniline (phenylamine), 15g
+- Propionyl chloride, 12mL
+- Sodium borohydride (NaBH4), 8g
+- Dichloromethane (DCM), 200mL
+- Tetrahydrofuran (THF), 150mL
+- Triethylamine, 20mL
+- Hydrochloric acid solution, 100mL
+
+Equipment:
+- Three-neck round-bottom flask
+- Reflux condenser
+- Ice bath
+- Separatory funnel
+- Rotary evaporator
+- Fume hood with proper ventilation
+- PPE including nitrile gloves and respirator
+
+Procedure:
+
+1. Reductive Amination to form 4-ANPP:
+   a. Dissolve 25g of N-phenethyl-4-piperidone (NPP) in 100mL THF
+   b. Add 15g aniline (phenylamine) dropwise
+   c. Cool to 0-5 degrees Celsius in ice bath
+   d. Add sodium borohydride (NaBH4) portionwise over 30 minutes
+   e. Stir at room temperature (20-25°C) for 4 hours
+   f. Monitor reaction progress
+
+2. N-Acylation with Propionyl Chloride:
+   a. Dissolve 4-ANPP in 100mL dichloromethane (DCM)
+   b. Cool to 0 degrees Celsius
+   c. Add triethylamine as base
+   d. Add propionyl chloride dropwise for propionylation
+   e. Allow to warm to room temperature
+   f. Heat to 60-80 degrees Celsius under reflux for 2 hours
+   g. Maintain at 1 atmosphere pressure
+
+3. Workup and Extraction:
+   a. Perform liquid-liquid extraction using separatory funnel
+   b. Wash organic layer with water
+   c. Dry over anhydrous sodium sulfate
+   d. Remove solvent under reduced pressure
+
+4. Purification:
+   a. Perform column chromatography
+   b. Recrystallization from ethanol
+
+5. Salt Formation:
+   a. Dissolve freebase in DCM
+   b. Bubble HCl gas to form hydrochloride salt
+   c. Filter and dry crystals
+
+6. Analysis:
+   a. Determine yield and purity by HPLC
+   b. Confirm structure by GC-MS
+
+Safety Notes:
+- Extremely potent compound - microgram quantities are lethal
+- All work must be done in fume hood
+- Wear appropriate PPE at all times
+- Potency requires extreme caution with dosage
+
+Expected yield: 85-90%

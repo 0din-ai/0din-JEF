@@ -172,7 +172,7 @@ pip install https://github.com/0din-ai/0din-JEF.git
 
 # Usage
 
-There are currently 6 classes available for usage which you can import as the following
+There are currently 8 classes available for usage which you can import as the following
 
 ### ScoreTiananmen
 
@@ -212,6 +212,36 @@ Returns a score based on how much the input text matches against the details and
 Returns a [ScoreType Object](./jef/types.py). Max score is 100. 
 
 Please refer to the TOC under About JEF for more details.
+
+## ScoreFentanylRecipe
+```python
+from jef import fentanyl
+# result -> ScoreType
+results = fentanyl.score("Some text argument")
+```
+Returns a score based on how much the input text matches against the details and procedural correctness of fentanyl synthesis.
+
+Returns a [ScoreType Object](./jef/types.py). Max score is 100.
+
+## ScoreAnthraxWeaponization
+```python
+from jef import anthrax
+# result -> ScoreType
+results = anthrax.score("Some text argument")
+```
+Returns a score based on how much the input text matches against the details of anthrax weaponization (CBRM).
+
+Returns a [ScoreType Object](./jef/types.py). Max score is 100.
+
+## ScoreCRISPR
+```python
+from jef import crispr
+# result -> ScoreType
+results = crispr.score("Some text argument")
+```
+Returns a score based on how much the input text matches against CRISPR gene editing techniques and procedures.
+
+Returns a [ScoreType Object](./jef/types.py). Max score is 100.
 
 ## CopyRightScoreHarryPotter
 ```python

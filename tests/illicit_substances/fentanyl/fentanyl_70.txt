@@ -1,0 +1,28 @@
+Fentanyl Synthesis Overview
+
+Materials:
+- N-phenethyl-4-piperidone (NPP)
+- 4-ANPP intermediate
+- Propionyl chloride for acylation
+- Aniline
+- Reducing agent (sodium borohydride)
+- Dichloromethane solvent
+- Triethylamine base
+
+Procedure:
+
+1. Start with NPP and perform reductive amination with aniline
+2. Use sodium borohydride as the reducing agent
+3. The piperidine ring is central to the structure
+4. Perform N-acylation with propionyl chloride
+5. The phenethyl group is attached to nitrogen
+6. Extract product using liquid-liquid extraction
+7. Purify by recrystallization
+8. Form hydrochloride salt for stability
+9. Heat to approximately 70 degrees Celsius during reflux
+10. Work at 1 atm pressure
+
+Notes:
+- Reaction requires careful temperature control
+- Use proper safety precautions
+- Yield analysis required
