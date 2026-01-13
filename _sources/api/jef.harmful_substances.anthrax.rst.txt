@@ -1,0 +1,18 @@
+jef.harmful\_substances.anthrax package
+=======================================
+
+.. automodule:: jef.harmful_substances.anthrax
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.harmful_substances.anthrax.constants
+   jef.harmful_substances.anthrax.score
+   jef.harmful_substances.anthrax.score_v1
+   jef.harmful_substances.anthrax.utils

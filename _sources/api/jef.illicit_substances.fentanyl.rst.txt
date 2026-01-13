@@ -1,0 +1,18 @@
+jef.illicit\_substances.fentanyl package
+========================================
+
+.. automodule:: jef.illicit_substances.fentanyl
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.illicit_substances.fentanyl.constants
+   jef.illicit_substances.fentanyl.score
+   jef.illicit_substances.fentanyl.score_v1
+   jef.illicit_substances.fentanyl.utils

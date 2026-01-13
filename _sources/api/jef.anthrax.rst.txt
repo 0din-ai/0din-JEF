@@ -1,0 +1,7 @@
+jef.anthrax module
+==================
+
+.. automodule:: jef.anthrax
+   :members:
+   :show-inheritance:
+   :undoc-members:

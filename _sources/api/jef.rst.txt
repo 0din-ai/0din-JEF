@@ -14,6 +14,7 @@ Subpackages
 
    jef.chinese_censorship
    jef.copyrights
+   jef.genetic_manipulation
    jef.harmful_substances
    jef.illicit_substances
    jef.score_algos
@@ -24,9 +25,13 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   jef.anthrax
+   jef.crispr
+   jef.fentanyl
    jef.harry_potter
    jef.helpers
    jef.meth
    jef.nerve_agent
+   jef.registry
    jef.tiananmen
    jef.types

@@ -1,0 +1,7 @@
+jef.harmful\_substances.anthrax.score module
+============================================
+
+.. automodule:: jef.harmful_substances.anthrax.score
+   :members:
+   :show-inheritance:
+   :undoc-members:

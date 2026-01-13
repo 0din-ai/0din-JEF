@@ -1,0 +1,7 @@
+jef.illicit\_substances.fentanyl.utils module
+=============================================
+
+.. automodule:: jef.illicit_substances.fentanyl.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:

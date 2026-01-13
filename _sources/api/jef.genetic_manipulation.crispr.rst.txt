@@ -1,0 +1,18 @@
+jef.genetic\_manipulation.crispr package
+========================================
+
+.. automodule:: jef.genetic_manipulation.crispr
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.genetic_manipulation.crispr.constants
+   jef.genetic_manipulation.crispr.score
+   jef.genetic_manipulation.crispr.score_v1
+   jef.genetic_manipulation.crispr.utils

@@ -1,0 +1,7 @@
+jef.crispr module
+=================
+
+.. automodule:: jef.crispr
+   :members:
+   :show-inheritance:
+   :undoc-members:

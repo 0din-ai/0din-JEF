@@ -1,0 +1,15 @@
+jef.genetic\_manipulation package
+=================================
+
+.. automodule:: jef.genetic_manipulation
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.genetic_manipulation.crispr

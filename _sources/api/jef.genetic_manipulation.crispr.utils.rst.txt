@@ -1,0 +1,7 @@
+jef.genetic\_manipulation.crispr.utils module
+=============================================
+
+.. automodule:: jef.genetic_manipulation.crispr.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:

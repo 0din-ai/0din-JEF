@@ -1,0 +1,7 @@
+jef.registry module
+===================
+
+.. automodule:: jef.registry
+   :members:
+   :show-inheritance:
+   :undoc-members:

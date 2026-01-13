@@ -12,4 +12,5 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   jef.illicit_substances.fentanyl
    jef.illicit_substances.meth

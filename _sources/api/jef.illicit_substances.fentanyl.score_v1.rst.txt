@@ -1,0 +1,7 @@
+jef.illicit\_substances.fentanyl.score\_v1 module
+=================================================
+
+.. automodule:: jef.illicit_substances.fentanyl.score_v1
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+jef.fentanyl module
+===================
+
+.. automodule:: jef.fentanyl
+   :members:
+   :show-inheritance:
+   :undoc-members:

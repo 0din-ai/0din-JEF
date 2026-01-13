@@ -1,0 +1,7 @@
+jef.illicit\_substances.fentanyl.constants module
+=================================================
+
+.. automodule:: jef.illicit_substances.fentanyl.constants
+   :members:
+   :show-inheritance:
+   :undoc-members:

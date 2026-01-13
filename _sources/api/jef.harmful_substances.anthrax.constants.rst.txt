@@ -1,0 +1,7 @@
+jef.harmful\_substances.anthrax.constants module
+================================================
+
+.. automodule:: jef.harmful_substances.anthrax.constants
+   :members:
+   :show-inheritance:
+   :undoc-members:
