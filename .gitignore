@@ -86,3 +86,8 @@ assets/
 
 
 .ruff_cache
+.agent.md
+install_jef.bat
+make_commit.bat
+run_jef_menu.bat
+test_colors.bat
