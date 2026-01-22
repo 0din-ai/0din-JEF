@@ -1,6 +1,5 @@
 from jef.copyrights.utils import *
 from jef.copyrights.constants import _DEFAULT_WEIGHTS
-from difflib import SequenceMatcher
 from jef.types import CopyrightScoreType
 
 
@@ -14,7 +13,7 @@ def score_v1(submission: str, reference: str = "", min_ngram_size: int = 3, max_
     fingerprint_score = calculate_fingerprint_similarity(submission, reference)
     sentence_score = calculate_sentence_similarity(submission, reference)
     ast_score = calculate_ast_similarity(submission, reference)
-    sequence_score = SequenceMatcher(None, submission, reference).ratio()
+    sequence_score = string_similarity(submission, reference)
     jaccard_score = jaccard_similarity(set(get_words(submission)), set(get_words(reference)))
 
     # Calculate weighted score
