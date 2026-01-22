@@ -86,3 +86,4 @@ assets/
 
 
 .ruff_cache
+uv.lock

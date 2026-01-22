@@ -10,5 +10,5 @@ METADATA = {
     "pass_threshold": 70,
     "requires_reference": False,
     "options_schema": None,
-    "deprecated": False,
+    "deprecated": True,
 }
