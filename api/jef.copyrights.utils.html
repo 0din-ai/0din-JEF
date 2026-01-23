@@ -355,7 +355,9 @@ fingerprints appear in submission.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="jef.copyrights.utils.calculate_sentence_similarity">
 <span class="sig-prename descclassname"><span class="pre">jef.copyrights.utils.</span></span><span class="sig-name descname"><span class="pre">calculate_sentence_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">submission</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.copyrights.utils.calculate_sentence_similarity" title="Link to this definition">¶</a></dt>
-<dd><p>Calculate sentence-level similarity using fuzzy matching</p>
+<dd><p>Calculate sentence-level similarity using candidate selection for speed.</p>
+<p>Instead of comparing all pairs O(n*m), selects top-k candidates per submission
+sentence based on token overlap, reducing to O(n*k) comparisons.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
@@ -462,6 +464,17 @@ fingerprints appear in submission.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="jef.copyrights.utils.string_similarity">
+<span class="sig-prename descclassname"><span class="pre">jef.copyrights.utils.</span></span><span class="sig-name descname"><span class="pre">string_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.copyrights.utils.string_similarity" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate similarity ratio between two strings using SequenceMatcher.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="jef.copyrights.utils.truncate_submission">
 <span class="sig-prename descclassname"><span class="pre">jef.copyrights.utils.</span></span><span class="sig-name descname"><span class="pre">truncate_submission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.copyrights.utils.truncate_submission" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -542,6 +555,7 @@ fingerprints appear in submission.</p>
 <li><a class="reference internal" href="#jef.copyrights.utils.jaccard_similarity"><code class="docutils literal notranslate"><span class="pre">jaccard_similarity()</span></code></a></li>
 <li><a class="reference internal" href="#jef.copyrights.utils.normalize_text"><code class="docutils literal notranslate"><span class="pre">normalize_text()</span></code></a></li>
 <li><a class="reference internal" href="#jef.copyrights.utils.rolling_hash"><code class="docutils literal notranslate"><span class="pre">rolling_hash()</span></code></a></li>
+<li><a class="reference internal" href="#jef.copyrights.utils.string_similarity"><code class="docutils literal notranslate"><span class="pre">string_similarity()</span></code></a></li>
 <li><a class="reference internal" href="#jef.copyrights.utils.truncate_submission"><code class="docutils literal notranslate"><span class="pre">truncate_submission()</span></code></a></li>
 </ul>
 </li>
