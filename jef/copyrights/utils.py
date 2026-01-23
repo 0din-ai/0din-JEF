@@ -1,7 +1,13 @@
 import re
 import math
+from collections import defaultdict
 from typing import List, Dict, Tuple
 from difflib import SequenceMatcher
+
+
+def string_similarity(a: str, b: str) -> float:
+    """Calculate similarity ratio between two strings using SequenceMatcher."""
+    return SequenceMatcher(None, a, b).ratio()
 
 
 def normalize_text(text: str) -> str:
@@ -188,22 +194,54 @@ def calculate_fingerprint_similarity(submission: str, reference: str, k: int = 5
 
 
 def calculate_sentence_similarity(submission: str, reference: str) -> float:
-    """Calculate sentence-level similarity using fuzzy matching"""
+    """Calculate sentence-level similarity using candidate selection for speed.
 
+    Instead of comparing all pairs O(n*m), selects top-k candidates per submission
+    sentence based on token overlap, reducing to O(n*k) comparisons.
+    """
     submission_sentences = _get_sentences(submission)
     reference_sentences = _get_sentences(reference)
 
     if not reference_sentences or not submission_sentences:
         return 0.0
 
-    # For each reference sentence, find its best match in submission
+    # Build inverted index: token -> list of reference sentence indices
+    token_to_refs = defaultdict(list)
+    for idx, sent in enumerate(reference_sentences):
+        for token in sent.split():
+            token_to_refs[token].append(idx)
+
+    best_by_ref = [0.0] * len(reference_sentences)
+
+    for sub_sent in submission_sentences:
+        # Count token overlap with each reference sentence
+        overlap = defaultdict(int)
+        for token in sub_sent.split():
+            for ref_idx in token_to_refs[token]:
+                overlap[ref_idx] += 1
+
+        # Compare only top-k candidates by overlap
+        for ref_idx in sorted(overlap.keys(), key=lambda x: overlap[x], reverse=True)[:30]:
+            ratio = string_similarity(sub_sent, reference_sentences[ref_idx])
+            if ratio > 0.5:
+                best_by_ref[ref_idx] = max(best_by_ref[ref_idx], ratio)
+
+    return sum(best_by_ref) / len(reference_sentences)
+
+
+def _calculate_sentence_similarity_baseline(submission: str, reference: str) -> float:
+    """Baseline O(n*m) sentence similarity for testing accuracy parity."""
+    submission_sentences = _get_sentences(submission)
+    reference_sentences = _get_sentences(reference)
+
+    if not reference_sentences or not submission_sentences:
+        return 0.0
+
     total_score = 0.0
     for ref_sent in reference_sentences:
         best_score = 0.0
         for sub_sent in submission_sentences:
-            # Calculate fuzzy match ratio
-            ratio = SequenceMatcher(None, ref_sent, sub_sent).ratio()
-            # Consider a match if ratio > 0.5 to catch partial matches
+            ratio = string_similarity(ref_sent, sub_sent)
             if ratio > 0.5:
                 best_score = max(best_score, ratio)
         total_score += best_score

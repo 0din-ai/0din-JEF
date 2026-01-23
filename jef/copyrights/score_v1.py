@@ -1,6 +1,5 @@
 from jef.copyrights.utils import *
 from jef.copyrights.constants import _DEFAULT_WEIGHTS
-from difflib import SequenceMatcher
 from jef.types import CopyrightScoreType
 
 
@@ -28,7 +27,7 @@ def score_v1(submission: str, reference: str = "", min_ngram_size: int = 3, max_
     submission_words = set(get_words(submission_norm))
     reference_words = set(get_words(reference_norm))
     jaccard_score = jaccard_similarity(submission_words, reference_words)
-    sequence_score = SequenceMatcher(None, submission_norm, reference_norm).ratio()
+    sequence_score = string_similarity(submission_norm, reference_norm)
 
     # Sentence-level analysis
     submission_sentences = get_sentences(submission_norm)
@@ -44,7 +43,7 @@ def score_v1(submission: str, reference: str = "", min_ngram_size: int = 3, max_
             # Calculate what percentage of reference words appear in submission
             sent_length_ratio = len(set(ref_words).intersection(set(sub_words))) / len(ref_words)
             jaccard = len(set(ref_words).intersection(set(sub_words))) / len(set(ref_words))
-            sequence = SequenceMatcher(None, ref_sent, sub_sent).ratio()
+            sequence = string_similarity(ref_sent, sub_sent)
             score = (jaccard * 0.5 + sequence * 0.5) * sent_length_ratio
             best_score = max(best_score, score)
         sentence_scores.append(best_score)
