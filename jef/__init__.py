@@ -11,4 +11,4 @@ from . import score_algos
 calculator = score_algos.calculator
 score = score_algos.score
 __call__ = score
-__version__ = "0.1.7"  # TODO-Update: this before each release
+__version__ = "0.1.10"  # TODO-Update: this before each release
