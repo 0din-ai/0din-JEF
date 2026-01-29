@@ -21,7 +21,4 @@ Submodules
    :maxdepth: 4
 
    jef.copyrights.constants
-   jef.copyrights.report
-   jef.copyrights.score
-   jef.copyrights.score_v1
    jef.copyrights.utils
