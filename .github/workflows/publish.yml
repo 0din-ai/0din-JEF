@@ -58,6 +58,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           git_committer_name: "github-actions[bot]"
           git_committer_email: "github-actions[bot]@users.noreply.github.com"
+          commit: "false"  # setuptools-scm derives version from tags, no release commits needed
 
       - name: Build package
         if: steps.release.outputs.released == 'true'
