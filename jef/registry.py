@@ -13,7 +13,6 @@ import jef
 _SCORING_MODULES = [
     "jef.illicit_substances.meth",
     "jef.illicit_substances.fentanyl",
-    "jef.copyrights",
     "jef.copyrights.harry_potter",
     "jef.harmful_substances.nerve_agent",
     "jef.harmful_substances.anthrax",
