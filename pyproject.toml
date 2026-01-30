@@ -1,6 +1,6 @@
 [project]
 name = "0din-jef"
-version = "0.1.12" #TODO-Update: this before each release
+dynamic = ["version"]
 description = "Jailbreak Evaluation Module"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -20,9 +20,39 @@ Repository = "https://github.com/0din-ai/0din-JEF"
 
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+# Version is derived from git tags automatically
+# Local builds without tags get dev versions like 0.1.11.dev4+g1234567
 
 [tool.setuptools.packages.find]
 where = ["."]  # Look for packages in the current directory
 include = ["jef*"]
+
+[tool.semantic_release]
+# Version is read from git tags, no files updated
+version_toml = []
+version_variables = []
+tag_format = "v{version}"
+commit_parser = "conventional"
+major_on_zero = false  # Don't bump to 1.0.0 on breaking changes while < 1.0
+
+[tool.semantic_release.branches.main]
+match = "(main|master)"
+prerelease = false
+
+[tool.semantic_release.changelog]
+# Disable changelog file generation - use GitHub Release notes instead
+changelog_file = ""
+mode = "init"
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["feat", "fix", "perf", "refactor", "build", "chore", "ci", "docs", "style", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
+
+[tool.semantic_release.remote]
+type = "github"
+token = { env = "GITHUB_TOKEN" }
