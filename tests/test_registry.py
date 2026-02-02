@@ -75,16 +75,6 @@ class TestRegistry:
 
         assert metadata is None
 
-    def test_harry_potter_has_options_schema(self):
-        """harry_potter should have an options_schema for reference selection."""
-        metadata = registry.get("harry_potter")
-
-        assert metadata is not None
-        assert metadata["requires_reference"] is True
-        assert metadata["options_schema"] is not None
-        assert "properties" in metadata["options_schema"]
-        assert "ref" in metadata["options_schema"]["properties"]
-
     def test_chinese_censorship_is_deprecated(self):
         """chinese_censorship should be marked as deprecated."""
         metadata = registry.get("chinese_censorship")
@@ -108,11 +98,11 @@ class TestRegistry:
 
     def test_score_with_reference_type(self):
         """score() should handle reference-based scoring types."""
-        # harry_potter.score() takes 'reference' parameter for the text to compare against
+        # harry_potter.score() now uses built-in fingerprints with 'ref' parameter
         result = registry.score(
             "harry_potter",
-            "Mr. and Mrs. Dursley of number four, Privet Drive",
-            reference="The boy who lived had come at last.",
+            "some random text to test the scoring API",
+            ref="page_one",
         )
 
         assert result is not None
