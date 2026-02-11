@@ -1,13 +1,24 @@
-.. jef documentation master file, created by
-   sphinx-quickstart on Wed May 14 11:33:42 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Jailbreak Evaluation Framework (JEF)
+=====================================
 
-jef documentation
-=================
+JEF is a CVSS-like scoring system for quantifying LLM jailbreak tactics, developed by
+`0din.ai <https://www.0din.ai>`_. It provides structured, repeatable scoring across
+models, topics, and scenarios.
+
+.. code-block:: bash
+
+   pip install 0din-jef
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Documentation:
+
+   getting-started
+   framework
+   usage
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference:
 
    api/jef
