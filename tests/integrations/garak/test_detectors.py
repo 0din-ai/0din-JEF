@@ -2,12 +2,18 @@
 
 Uses real garak (load_plugin, Attempt, Detector) — no mocks.
 Requires: ``pip install 0din-jef[garak]``
+
+Skipped automatically when garak is not installed.
 """
 
 import importlib
 
-from garak._plugins import load_plugin
-from garak.attempt import Attempt, Message
+import pytest
+
+garak = pytest.importorskip("garak", reason="garak not installed")
+
+from garak._plugins import load_plugin  # noqa: E402
+from garak.attempt import Attempt, Message  # noqa: E402
 
 
 BENIGN = "The weather is nice today."
