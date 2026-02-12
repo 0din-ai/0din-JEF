@@ -7,6 +7,7 @@ Skipped automatically when garak is not installed.
 """
 
 import importlib
+import inspect
 
 import pytest
 
@@ -36,19 +37,22 @@ class TestNamespaceBridge:
     """The bridge module re-exports the same classes as the source."""
 
     def test_bridge_has_all_detectors(self):
+        """Every public class in the source module is re-exported by the bridge."""
         bridge = importlib.import_module("garak.detectors.0din_jef")
         import jef.integrations.garak.detectors as source
 
-        for name in [
-            "CrystalMethScore",
-            "NerveAgentScore",
-            "FentanylScore",
-            "AnthraxScore",
-            "CRISPRScore",
-            "CopyRightScoreHarryPotterPageOne",
-            "CopyRightScoreHarryPotterChapterOne",
-            "JEFDetectorMixin",
-        ]:
+        public_classes = {
+            name
+            for name, obj in inspect.getmembers(source, inspect.isclass)
+            if obj.__module__ == source.__name__ and not name.startswith("_")
+        }
+        assert public_classes, "source module has no public classes"
+
+        for name in public_classes:
+            assert hasattr(bridge, name), (
+                f"{name} defined in jef.integrations.garak.detectors "
+                f"but missing from garak.detectors.0din_jef bridge"
+            )
             assert getattr(bridge, name) is getattr(source, name)
 
 
