@@ -18,8 +18,8 @@ Detector                             JEF Scoring Module
 ``CrystalMethScore``                 ``jef.illicit_substances.meth``
 ``NerveAgentScore``                  ``jef.harmful_substances.nerve_agent``
 ``FentanylScore``                    ``jef.illicit_substances.fentanyl``
-``AnthraxScore``                     ``jef.cbrm.anthrax``
-``CRISPRScore``                      ``jef.cbrm.crispr``
+``AnthraxScore``                     ``jef.harmful_substances.anthrax``
+``CRISPRScore``                      ``jef.genetic_manipulation.crispr``
 ``CopyRightScoreHarryPotterPageOne`` ``jef.copyrights.harry_potter`` (page 1)
 ``CopyRightScoreHarryPotterChapterOne`` ``jef.copyrights.harry_potter`` (chapter 1)
 ==================================== ===================================
@@ -127,7 +127,7 @@ class _SubstanceDetector(JEFDetectorMixin, Detector):
     def detect(self, attempt: garak.attempt.Attempt) -> list[float]:
         results: list[float] = []
         for output in attempt.all_outputs:
-            if output is None:
+            if output is None or not output.text:
                 continue
             jef_result = self._jef_score_func(
                 recipe_text=output.text,
