@@ -12,8 +12,9 @@ authors = [
 
 
 [project.optional-dependencies]
-dev = ["pytest", "requests"]
+dev = ["pytest", "requests", "pytest-asyncio"]
 garak = ["garak>=0.13.3"]
+pyrit = ["pyrit>=0.11"]
 
 [project.urls]
 Homepage = "https://0din.ai"
@@ -28,8 +29,10 @@ build-backend = "setuptools.build_meta"
 # Version is derived from git tags automatically
 # Local builds without tags get dev versions like 0.1.11.dev4+g1234567
 
-# namespaces=true (the default) enables PEP 420*0* implicit namespace package
-# scanning, which is required because garak/ bridge dirs have no __init__.py.
+# namespaces=true enables PEP 420 implicit namespace package scanning,
+# required because garak/ bridge dirs have no __init__.py.
+# "garak.detectors" is needed to ship garak/detectors/0din_jef.py (the
+# namespace bridge).  PyRIT needs no bridge — its scorers live under jef/*.
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["jef*", "garak.detectors"]

@@ -56,6 +56,14 @@ from garak.detectors.base import Detector
 from garak import _config
 import garak.attempt
 
+from jef.integrations import (
+    JEFResult,
+    SubstanceScorerDef,
+    SUBSTANCE_SCORERS,
+    score_substance,
+    score_copyright,
+)
+
 
 # ---------------------------------------------------------------------------
 # Mixin: shared logic for all JEF-backed detectors
@@ -67,20 +75,14 @@ class JEFDetectorMixin:
 
     Provides:
     - Common ``display_name`` property with last-score display
-    - ``_process_jef_result`` helper that normalises JEF output and
-      populates ``attempt.notes``
-    - ``_jef_score_func`` slot — set by each subclass ``__init__``
+    - ``_process_result`` helper that normalises a :class:`JEFResult`
+      and populates ``attempt.notes``
 
     Note on ``attempt.notes`` mutation: when ``detect()`` processes
     multiple outputs, ``details`` is extended cumulatively while
     ``score_percentage`` and ``missing`` reflect the *last* output
     processed.  This matches the upstream garak-0din-plugins behaviour.
     """
-
-    # Set by subclass __init__ as an instance attribute.  Because it's
-    # assigned on the instance (not the class), Python stores it as a plain
-    # attribute — not a bound method — so ``self`` is not auto-passed.
-    _jef_score_func = None
 
     @property
     def display_name(self):
@@ -89,31 +91,22 @@ class JEFDetectorMixin:
             return f"{self._display_name} ({self._last_score:.2f}%)"
         return self._display_name
 
-    def _process_jef_result(self, jef_result: dict, attempt) -> float:
-        """Normalise a JEF result dict and update *attempt.notes*.
+    def _process_result(self, result: JEFResult, attempt) -> float:
+        """Populate *attempt.notes* from a :class:`JEFResult` and return 0-1 value."""
+        self._last_score = result.percentage
 
-        Args:
-            jef_result: Dict from a JEF scoring function.  Must contain
-                ``percentage`` (0-100).  May contain ``matches`` and
-                ``missing`` lists.
-            attempt: A ``garak.attempt.Attempt`` (or duck-typed stand-in).
-
-        Returns:
-            float in 0.0-1.0 (garak convention).
-        """
-        normalised = jef_result["percentage"] / 100.0
-        self._last_score = jef_result["percentage"]
-
-        if jef_result.get("matches"):
+        matches = result.metadata.get("matches")
+        if matches:
             if "details" not in attempt.notes:
                 attempt.notes["details"] = []
-            attempt.notes["details"].extend(jef_result["matches"])
+            attempt.notes["details"].extend(matches)
 
-        if jef_result.get("missing"):
-            attempt.notes["missing"] = jef_result["missing"]
+        missing = result.metadata.get("missing")
+        if missing:
+            attempt.notes["missing"] = missing
 
-        attempt.notes["score_percentage"] = f"{jef_result['percentage']:.2f}%"
-        return normalised
+        attempt.notes["score_percentage"] = f"{result.percentage:.2f}%"
+        return result.value
 
 
 # ---------------------------------------------------------------------------
@@ -122,51 +115,52 @@ class JEFDetectorMixin:
 
 
 class _SubstanceDetector(JEFDetectorMixin, Detector):
-    """Base for detectors that call JEF with ``(recipe_text=..., show_matches=True)``."""
+    """Base for detectors that call JEF with ``(recipe_text=..., show_matches=True)``.
+
+    Subclasses set ``_scorer_key`` to select a definition from
+    :data:`jef.integrations.SUBSTANCE_SCORERS`.
+    """
+
+    _scorer_key: str = ""
+
+    @property
+    def _def(self) -> "SubstanceScorerDef":
+        return SUBSTANCE_SCORERS[self._scorer_key]
 
     def detect(self, attempt: garak.attempt.Attempt) -> list[float]:
         results: list[float] = []
         for output in attempt.all_outputs:
             if output is None or not output.text:
                 continue
-            jef_result = self._jef_score_func(
-                recipe_text=output.text,
-                show_matches=True,
+            result = score_substance(
+                self._def.module_path, output.text, show_matches=True
             )
-            results.append(self._process_jef_result(jef_result, attempt))
+            results.append(self._process_result(result, attempt))
         return results if results else [0.0]
 
 
 class CrystalMethScore(_SubstanceDetector):
     """Scores text for crystal meth synthesis content using JEF."""
 
-    description = (
-        "Scores text based on presence of crystal meth synthesis-related content"
-    )
-    tags = ["avid-effect:ethics:E0301", "avid-effect:security:S0403"]
+    _scorer_key = "meth"
+    description = SUBSTANCE_SCORERS["meth"].description
+    tags = list(SUBSTANCE_SCORERS["meth"].tags)
 
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.CrystalMethScore"
-        from jef.illicit_substances.meth import score as meth_score
-
-        self._jef_score_func = meth_score
 
 
 class NerveAgentScore(_SubstanceDetector):
     """Scores text for nerve agent synthesis content using JEF."""
 
-    description = (
-        "Scores text based on presence of nerve agent synthesis-related content"
-    )
-    tags = ["avid-effect:ethics:E0301", "avid-effect:security:S0403"]
+    _scorer_key = "nerve_agent"
+    description = SUBSTANCE_SCORERS["nerve_agent"].description
+    tags = list(SUBSTANCE_SCORERS["nerve_agent"].tags)
 
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.NerveAgentScore"
-        from jef.harmful_substances.nerve_agent import score as nerve_agent_score
-
-        self._jef_score_func = nerve_agent_score
 
 
 class FentanylScore(_SubstanceDetector):
@@ -176,15 +170,13 @@ class FentanylScore(_SubstanceDetector):
     synthesis procedures.
     """
 
-    description = "Scores text based on presence of fentanyl synthesis-related content"
-    tags = ["avid-effect:ethics:E0301", "avid-effect:security:S0403"]
+    _scorer_key = "fentanyl"
+    description = SUBSTANCE_SCORERS["fentanyl"].description
+    tags = list(SUBSTANCE_SCORERS["fentanyl"].tags)
 
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.FentanylScore"
-        from jef.illicit_substances.fentanyl import score as fentanyl_score
-
-        self._jef_score_func = fentanyl_score
 
 
 class AnthraxScore(_SubstanceDetector):
@@ -194,17 +186,13 @@ class AnthraxScore(_SubstanceDetector):
     components, and weaponisation indicators.
     """
 
-    description = (
-        "Scores text based on presence of anthrax/B. anthracis-related content"
-    )
-    tags = ["avid-effect:ethics:E0301", "avid-effect:security:S0403"]
+    _scorer_key = "anthrax"
+    description = SUBSTANCE_SCORERS["anthrax"].description
+    tags = list(SUBSTANCE_SCORERS["anthrax"].tags)
 
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.AnthraxScore"
-        from jef.harmful_substances.anthrax import score as anthrax_score
-
-        self._jef_score_func = anthrax_score
 
 
 class CRISPRScore(_SubstanceDetector):
@@ -214,15 +202,13 @@ class CRISPRScore(_SubstanceDetector):
     sequences, delivery methods, and HDR/NHEJ.
     """
 
-    description = "Scores text based on presence of CRISPR gene editing-related content"
-    tags = ["avid-effect:ethics:E0301", "avid-effect:security:S0403"]
+    _scorer_key = "crispr"
+    description = SUBSTANCE_SCORERS["crispr"].description
+    tags = list(SUBSTANCE_SCORERS["crispr"].tags)
 
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.CRISPRScore"
-        from jef.genetic_manipulation.crispr import score as crispr_score
-
-        self._jef_score_func = crispr_score
 
 
 # ---------------------------------------------------------------------------
@@ -248,13 +234,8 @@ class _CopyrightDetector(JEFDetectorMixin, Detector):
             if not text or not text.strip():
                 results.append(0.0)
                 continue
-            jef_result = self._jef_score_func(
-                submission=text,
-                ref=self._ref,
-                min_ngram_size=5,
-                max_ngram_size=7,
-            )
-            results.append(self._process_jef_result(jef_result, attempt))
+            result = score_copyright(text, ref=self._ref)
+            results.append(self._process_result(result, attempt))
         return results if results else [0.0]
 
 
@@ -275,10 +256,6 @@ class CopyRightScoreHarryPotterPageOne(_CopyrightDetector):
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.CopyRightScoreHarryPotterPageOne"
-        from jef.copyrights.harry_potter import score as hp_score
-        import jef.copyrights.harry_potter.references  # noqa: F401 — loads fingerprints
-
-        self._jef_score_func = hp_score
 
 
 class CopyRightScoreHarryPotterChapterOne(_CopyrightDetector):
@@ -297,7 +274,3 @@ class CopyRightScoreHarryPotterChapterOne(_CopyrightDetector):
     def __init__(self, config_root=_config):
         super().__init__(config_root)
         self._display_name = "0din_jef.CopyRightScoreHarryPotterChapterOne"
-        from jef.copyrights.harry_potter import score as hp_score
-        import jef.copyrights.harry_potter.references  # noqa: F401 — loads fingerprints
-
-        self._jef_score_func = hp_score
