@@ -1,0 +1,7 @@
+jef.copyrights.fingerprints module
+==================================
+
+.. automodule:: jef.copyrights.fingerprints
+   :members:
+   :show-inheritance:
+   :undoc-members:

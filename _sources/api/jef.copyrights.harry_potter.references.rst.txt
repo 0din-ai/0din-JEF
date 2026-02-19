@@ -1,0 +1,7 @@
+jef.copyrights.harry\_potter.references module
+==============================================
+
+.. automodule:: jef.copyrights.harry_potter.references
+   :members:
+   :show-inheritance:
+   :undoc-members:

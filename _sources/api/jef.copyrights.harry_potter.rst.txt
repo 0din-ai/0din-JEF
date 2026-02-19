@@ -12,5 +12,5 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   jef.copyrights.harry_potter.references
    jef.copyrights.harry_potter.score
-   jef.copyrights.harry_potter.score_v1

@@ -21,4 +21,5 @@ Submodules
    :maxdepth: 4
 
    jef.copyrights.constants
+   jef.copyrights.fingerprints
    jef.copyrights.utils

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting Started" href="getting-started.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="JEF Framework" href="framework.html"><link rel="prev" title="Jailbreak Evaluation Framework (JEF)" href="index.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>jef 0.3.1 documentation</title>
+        <title>Getting Started - jef 0.3.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">jef 0.3.1 documentation</div></a>
+      <a href="index.html"><div class="brand">jef 0.3.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -172,7 +172,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -180,7 +180,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   <span class="sidebar-brand-text">jef 0.3.1 documentation</span>
   
@@ -191,8 +191,8 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">JEF Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
 </ul>
@@ -301,7 +301,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/getting-started.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -314,61 +314,47 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="jailbreak-evaluation-framework-jef">
-<h1>Jailbreak Evaluation Framework (JEF)<a class="headerlink" href="#jailbreak-evaluation-framework-jef" title="Link to this heading">¶</a></h1>
-<p>JEF is a CVSS-like scoring system for quantifying LLM jailbreak tactics, developed by
-<a class="reference external" href="https://www.0din.ai">0din.ai</a>. It provides structured, repeatable scoring across
-models, topics, and scenarios.</p>
+          <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>Install from PyPI:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>0din-jef
 </pre></div>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#quick-start">Quick Start</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="framework.html">JEF Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="framework.html#about-jef">About JEF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="framework.html#core-dimensions-of-evaluation">Core Dimensions of Evaluation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="framework.html#jef-scoring-rubric-standardized-tests">JEF Scoring Rubric: Standardized Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="framework.html#jef-scoring-algorithm">JEF Scoring Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="framework.html#constraints-caveats-and-exclusions">Constraints, Caveats, and Exclusions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="framework.html#resources-further-reading">Resources &amp; Further Reading</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#return-types">Return Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#tiananmen-square-government-censorship">Tiananmen Square — Government Censorship</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#nerve-agent-harmful-substances">Nerve Agent — Harmful Substances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#crystal-meth-illicit-substances">Crystal Meth — Illicit Substances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#fentanyl-illicit-substances">Fentanyl — Illicit Substances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#anthrax-weaponization-cbrm">Anthrax Weaponization — CBRM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#crispr-gene-editing">CRISPR Gene Editing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#harry-potter-copyright-violation">Harry Potter — Copyright Violation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#general-copyright-detection">General Copyright Detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#jef-score-composite-scoring">JEF Score — Composite Scoring</a></li>
-</ul>
-</li>
-</ul>
+<p>Or install directly from GitHub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/0din-ai/0din-JEF.git
+</pre></div>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api/jef.html">jef package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/jef.html#subpackages">Subpackages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/jef.html#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>JEF provides scorer classes for evaluating jailbreak outputs across several categories.
+Each scorer returns a score out of 100.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">tiananmen</span><span class="p">,</span> <span class="n">nerve_agent</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span> <span class="n">harry_potter</span>
+
+<span class="c1"># Score a response against the Tiananmen fact benchmark</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">tiananmen</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>  <span class="c1"># 0-100</span>
+
+<span class="c1"># Score against nerve agent synthesis details</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">nerve_agent</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+
+<span class="c1"># Score against crystal meth synthesis details</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+
+<span class="c1"># Score copyright similarity against Harry Potter</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">harry_potter</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;LLM output&quot;</span><span class="p">,</span> <span class="s2">&quot;harry potter reference text&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
+<p>For a full list of available scorers and detailed usage, see the <a class="reference internal" href="usage.html"><span class="doc">Usage Guide</span></a> guide.</p>
+<p>To understand the scoring methodology and framework behind JEF, see the <a class="reference internal" href="framework.html"><span class="doc">JEF Framework</span></a> overview.</p>
+</section>
 </section>
 
         </article>
@@ -376,16 +362,26 @@ models, topics, and scenarios.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="getting-started.html">
+          <a class="next-page" href="framework.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Getting Started</div>
+                <div class="title">JEF Framework</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -404,8 +400,28 @@ models, topics, and scenarios.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
