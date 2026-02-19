@@ -17,6 +17,7 @@ Subpackages
    jef.genetic_manipulation
    jef.harmful_substances
    jef.illicit_substances
+   jef.integrations
    jef.score_algos
 
 Submodules

@@ -1,0 +1,7 @@
+jef.integrations.garak.detectors module
+=======================================
+
+.. automodule:: jef.integrations.garak.detectors
+   :members:
+   :show-inheritance:
+   :undoc-members:

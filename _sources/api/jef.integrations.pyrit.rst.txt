@@ -1,0 +1,15 @@
+jef.integrations.pyrit package
+==============================
+
+.. automodule:: jef.integrations.pyrit
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.integrations.pyrit.scorers

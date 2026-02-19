@@ -1,0 +1,7 @@
+jef.integrations.pyrit.scorers module
+=====================================
+
+.. automodule:: jef.integrations.pyrit.scorers
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,16 @@
+jef.integrations package
+========================
+
+.. automodule:: jef.integrations
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.integrations.garak
+   jef.integrations.pyrit

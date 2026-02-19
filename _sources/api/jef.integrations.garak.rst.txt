@@ -1,0 +1,15 @@
+jef.integrations.garak package
+==============================
+
+.. automodule:: jef.integrations.garak
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   jef.integrations.garak.detectors
