@@ -91,6 +91,33 @@ class TestBenignText:
 # ---------------------------------------------------------------------------
 
 
+class TestNoneTextMessage:
+    """Message(text=None) must not crash — returns [0.0]."""
+
+    @pytest.mark.parametrize(
+        "detector_name",
+        [
+            "CrystalMethScore",
+            "NerveAgentScore",
+            "FentanylScore",
+            "AnthraxScore",
+            "CRISPRScore",
+            "CopyRightScoreHarryPotterPageOne",
+            "CopyRightScoreHarryPotterChapterOne",
+        ],
+    )
+    def test_none_text_returns_zero(self, detector_name):
+        d = load_plugin(f"detectors.0din_jef.{detector_name}")
+        attempt = Attempt(prompt=Message(text="test", lang="*"))
+        attempt.outputs = [Message(text=None, lang="*")]
+        assert d.detect(attempt) == [0.0]
+
+
+# ---------------------------------------------------------------------------
+# End-to-end detection — relevant text should score above 0
+# ---------------------------------------------------------------------------
+
+
 class TestRelevantText:
     """Detectors should produce non-zero scores for content with matching indicators."""
 

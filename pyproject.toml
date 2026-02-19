@@ -12,7 +12,7 @@ authors = [
 
 
 [project.optional-dependencies]
-dev = ["pytest", "requests", "garak>=0.13.3"]
+dev = ["pytest", "requests"]
 garak = ["garak>=0.13.3"]
 
 [project.urls]
@@ -28,7 +28,7 @@ build-backend = "setuptools.build_meta"
 # Version is derived from git tags automatically
 # Local builds without tags get dev versions like 0.1.11.dev4+g1234567
 
-# namespaces=true (the default) enables PEP 420 implicit namespace package
+# namespaces=true (the default) enables PEP 420*0* implicit namespace package
 # scanning, which is required because garak/ bridge dirs have no __init__.py.
 [tool.setuptools.packages.find]
 where = ["."]

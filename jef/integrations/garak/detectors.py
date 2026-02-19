@@ -245,7 +245,7 @@ class _CopyrightDetector(JEFDetectorMixin, Detector):
             if output is None:
                 continue
             text = output.text
-            if not text or len(text.strip()) == 0:
+            if not text or not text.strip():
                 results.append(0.0)
                 continue
             jef_result = self._jef_score_func(
