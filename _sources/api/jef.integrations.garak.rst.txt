@@ -13,3 +13,4 @@ Submodules
    :maxdepth: 4
 
    jef.integrations.garak.detectors
+   jef.integrations.garak.probes

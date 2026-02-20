@@ -1,0 +1,7 @@
+jef.integrations.pyrit.seeds package
+====================================
+
+.. automodule:: jef.integrations.pyrit.seeds
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="jef.integrations.garak package" href="jef.integrations.garak.html"><link rel="prev" title="jef.illicit_substances.meth.utils module" href="jef.illicit_substances.meth.utils.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>jef.integrations package - jef 0.4.0 documentation</title>
+        <title>jef.integrations package - jef 0.5.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">jef 0.4.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">jef 0.5.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">jef 0.4.0 documentation</span>
+  <span class="sidebar-brand-text">jef 0.5.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -266,9 +266,11 @@
 <li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">jef.integrations package</a><input aria-label="Toggle navigation of jef.integrations package" checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="jef.integrations.garak.html">jef.integrations.garak package</a><input aria-label="Toggle navigation of jef.integrations.garak package" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="jef.integrations.garak.detectors.html">jef.integrations.garak.detectors module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jef.integrations.garak.probes.html">jef.integrations.garak.probes module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="jef.integrations.pyrit.html">jef.integrations.pyrit package</a><input aria-label="Toggle navigation of jef.integrations.pyrit package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="jef.integrations.pyrit.seeds.html">jef.integrations.pyrit.seeds package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jef.integrations.pyrit.scorers.html">jef.integrations.pyrit.scorers module</a></li>
 </ul>
 </li>
@@ -336,6 +338,20 @@
 <p>Both garak and PyRIT adapters delegate to the helpers here so that
 JEF call signatures, percentage normalisation, and metadata extraction
 live in one place.</p>
+<p>The <code class="xref py py-data docutils literal notranslate"><span class="pre">NDAY_PROBES</span></code> registry is the <strong>single source of truth</strong> for
+n-day probe definitions, loaded from <code class="docutils literal notranslate"><span class="pre">config/nday_probes.yaml</span></code>.
+Both garak probe classes and PyRIT seed YAML files are derived from
+it — add a new entry to the config and both integrations pick it up
+automatically (garak probes are generated dynamically; run
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">jef.integrations.pyrit.seeds</span></code> to regenerate YAML files).</p>
+<p>The registry is self-contained with no network dependencies, so it
+works in air-gapped environments.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="jef.integrations.DEFAULT_NDAY_TAGS">
+<span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_NDAY_TAGS</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['avid-effect:security:S0403',</span> <span class="pre">'avid-effect:ethics:E0301',</span> <span class="pre">'owasp:llm01',</span> <span class="pre">'quality:Security:PromptStability']</span></span><a class="headerlink" href="#jef.integrations.DEFAULT_NDAY_TAGS" title="Link to this definition">¶</a></dt>
+<dd><p>Default garak/AVID tags applied to all n-day probes.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="jef.integrations.JEFResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">JEFResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.integrations.JEFResult" title="Link to this definition">¶</a></dt>
@@ -388,6 +404,68 @@ live in one place.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">NdayProbeDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harm_categories</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recommended_detector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.integrations.NdayProbeDef" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Definition for a disclosed jailbreak technique (n-day probe).</p>
+<p>Loaded from <code class="docutils literal notranslate"><span class="pre">config/nday_probes.yaml</span></code>.  Self-contained — no
+network dependencies, works in air-gapped environments.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.authors">
+<span class="sig-name descname"><span class="pre">authors</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.authors" title="Link to this definition">¶</a></dt>
+<dd><p>Credited researchers.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.description" title="Link to this definition">¶</a></dt>
+<dd><p>Human-readable summary of the technique.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.disclosure_url">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">disclosure_url</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.disclosure_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.goal">
+<span class="sig-name descname"><span class="pre">goal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.goal" title="Link to this definition">¶</a></dt>
+<dd><p>Short goal statement (used by garak).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.guid">
+<span class="sig-name descname"><span class="pre">guid</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.guid" title="Link to this definition">¶</a></dt>
+<dd><p>0DIN case GUID (UUID).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.harm_categories">
+<span class="sig-name descname"><span class="pre">harm_categories</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.harm_categories" title="Link to this definition">¶</a></dt>
+<dd><p>PyRIT harm category labels.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.prompts">
+<span class="sig-name descname"><span class="pre">prompts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.prompts" title="Link to this definition">¶</a></dt>
+<dd><p>Attack prompt variants.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jef.integrations.NdayProbeDef.recommended_detector">
+<span class="sig-name descname"><span class="pre">recommended_detector</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#jef.integrations.NdayProbeDef.recommended_detector" title="Link to this definition">¶</a></dt>
+<dd><p>Garak detector name(s) to pair with this probe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="jef.integrations.ODIN_DISCLOSURES_BASE_URL">
+<span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">ODIN_DISCLOSURES_BASE_URL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://0din.ai/disclosures'</span></span><a class="headerlink" href="#jef.integrations.ODIN_DISCLOSURES_BASE_URL" title="Link to this definition">¶</a></dt>
+<dd><p>Base URL for 0DIN public disclosure pages.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="jef.integrations.SubstanceScorerDef">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">SubstanceScorerDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">substance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harm_category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.integrations.SubstanceScorerDef" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -423,6 +501,26 @@ live in one place.</p>
 <dt class="sig sig-object py" id="jef.integrations.get_score_func">
 <span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">get_score_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.integrations.get_score_func" title="Link to this definition">¶</a></dt>
 <dd><p>Lazily import a JEF module and return its <code class="docutils literal notranslate"><span class="pre">score</span></code> function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.integrations.nday_to_seed_dict">
+<span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">nday_to_seed_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.integrations.nday_to_seed_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a <a class="reference internal" href="#jef.integrations.NdayProbeDef" title="jef.integrations.NdayProbeDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">NdayProbeDef</span></code></a> to a PyRIT seed YAML-compatible dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Registry key (snake_case identifier).</p></li>
+<li><p><strong>probe</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#jef.integrations.NdayProbeDef" title="jef.integrations.NdayProbeDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">NdayProbeDef</span></code></a></span>) – The probe definition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</span></p>
+</dd>
+</dl>
+<p>The returned dict can be written to YAML and loaded by
+<code class="docutils literal notranslate"><span class="pre">pyrit.models.SeedDataset.from_yaml_file()</span></code>.  Uses the PyRIT
+<code class="docutils literal notranslate"><span class="pre">seeds:</span></code> format where each seed carries its own metadata.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -469,6 +567,17 @@ live in one place.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="jef.integrations.snake_to_pascal">
+<span class="sig-prename descclassname"><span class="pre">jef.integrations.</span></span><span class="sig-name descname"><span class="pre">snake_to_pascal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.integrations.snake_to_pascal" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a snake_case registry key to PascalCase class name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -476,11 +585,19 @@ live in one place.</p>
 <li class="toctree-l1"><a class="reference internal" href="jef.integrations.garak.html">jef.integrations.garak package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="jef.integrations.garak.html#submodules">Submodules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jef.integrations.garak.detectors.html">jef.integrations.garak.detectors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jef.integrations.garak.probes.html">jef.integrations.garak.probes module</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="jef.integrations.pyrit.html">jef.integrations.pyrit package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jef.integrations.pyrit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jef.integrations.pyrit.seeds.html">jef.integrations.pyrit.seeds package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jef.integrations.pyrit.seeds.html#jef.integrations.pyrit.seeds.SEEDS_DIR"><code class="docutils literal notranslate"><span class="pre">SEEDS_DIR</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="jef.integrations.pyrit.html#submodules">Submodules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jef.integrations.pyrit.scorers.html">jef.integrations.pyrit.scorers module</a></li>
 </ul>
@@ -548,6 +665,7 @@ live in one place.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">jef.integrations package</a><ul>
+<li><a class="reference internal" href="#jef.integrations.DEFAULT_NDAY_TAGS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_NDAY_TAGS</span></code></a></li>
 <li><a class="reference internal" href="#jef.integrations.JEFResult"><code class="docutils literal notranslate"><span class="pre">JEFResult</span></code></a><ul>
 <li><a class="reference internal" href="#jef.integrations.JEFResult.value"><code class="docutils literal notranslate"><span class="pre">JEFResult.value</span></code></a></li>
 <li><a class="reference internal" href="#jef.integrations.JEFResult.percentage"><code class="docutils literal notranslate"><span class="pre">JEFResult.percentage</span></code></a></li>
@@ -559,6 +677,18 @@ live in one place.</p>
 <li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">JEFResult.value</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef</span></code></a><ul>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.authors"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.authors</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.description"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.description</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.disclosure_url"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.disclosure_url</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.goal"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.goal</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.guid"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.guid</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.harm_categories"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.harm_categories</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.prompts"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.prompts</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.NdayProbeDef.recommended_detector"><code class="docutils literal notranslate"><span class="pre">NdayProbeDef.recommended_detector</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#jef.integrations.ODIN_DISCLOSURES_BASE_URL"><code class="docutils literal notranslate"><span class="pre">ODIN_DISCLOSURES_BASE_URL</span></code></a></li>
 <li><a class="reference internal" href="#jef.integrations.SubstanceScorerDef"><code class="docutils literal notranslate"><span class="pre">SubstanceScorerDef</span></code></a><ul>
 <li><a class="reference internal" href="#jef.integrations.SubstanceScorerDef.description"><code class="docutils literal notranslate"><span class="pre">SubstanceScorerDef.description</span></code></a></li>
 <li><a class="reference internal" href="#jef.integrations.SubstanceScorerDef.harm_category"><code class="docutils literal notranslate"><span class="pre">SubstanceScorerDef.harm_category</span></code></a></li>
@@ -568,8 +698,10 @@ live in one place.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#jef.integrations.get_score_func"><code class="docutils literal notranslate"><span class="pre">get_score_func()</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.nday_to_seed_dict"><code class="docutils literal notranslate"><span class="pre">nday_to_seed_dict()</span></code></a></li>
 <li><a class="reference internal" href="#jef.integrations.score_copyright"><code class="docutils literal notranslate"><span class="pre">score_copyright()</span></code></a></li>
 <li><a class="reference internal" href="#jef.integrations.score_substance"><code class="docutils literal notranslate"><span class="pre">score_substance()</span></code></a></li>
+<li><a class="reference internal" href="#jef.integrations.snake_to_pascal"><code class="docutils literal notranslate"><span class="pre">snake_to_pascal()</span></code></a></li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 </ul>
 </li>
@@ -582,7 +714,7 @@ live in one place.</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=6c02275b"></script>
+</div><script src="../_static/documentation_options.js?v=1dd76d02"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
