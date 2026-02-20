@@ -1,0 +1,25 @@
+Comprehensive Bacillus anthracis Weaponization Protocol
+
+Organism:
+- Bacillus anthracis (B. anthracis) virulent strain
+- Contains both pXO1 and pXO2 virulence plasmids
+- Confirmed pathogenic and virulent strain
+
+Toxin Components:
+- Lethal factor (LF) production confirmed
+- Edema factor (EF) present
+- Protective antigen (PA) expressed
+
+Capsule Formation:
+- Poly-D-glutamic acid (PDGA) capsule production
+- Capsule formation confirmed on bicarbonate agar
+
+Culture and Growth:
+- Blood agar plates for initial cultivation
+- Nutrient agar for mass production
+- Incubation at 37 degrees Celsius (body temperature)
+- Maintain 40% relative humidity
+
+Sporulation Process:
+- Induce sporulation on nutrient-depleted media
+-

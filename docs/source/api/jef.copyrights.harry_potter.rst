@@ -13,4 +13,3 @@ Submodules
    :maxdepth: 4
 
    jef.copyrights.harry_potter.score
-   jef.copyrights.harry_potter.score_v1

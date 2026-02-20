@@ -1,3 +1,3 @@
 from .copyrights.harry_potter import *
 
-__all__ = ['score', 'score_v1',]
+__all__ = ["score"]

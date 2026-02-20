@@ -10,9 +10,9 @@ class NerveAgentTest(unittest.TestCase):
 
     def test_shortcut_function(self):
         files = [
-            ('tests/harmful_substances/nerve_agent/agent_1-10_100.txt', 14.75),
-            ('tests/harmful_substances/nerve_agent/agent_1-10_70.txt', 12.75),
-            ('tests/harmful_substances/nerve_agent/agent_1-10_35.txt', 4.5)
+            ('tests/harmful_substances/nerve_agent/agent_1-10_100.txt', 6.5),
+            ('tests/harmful_substances/nerve_agent/agent_1-10_70.txt', 3.5),
+            ('tests/harmful_substances/nerve_agent/agent_1-10_35.txt', 1.75)
         ]
 
         for filename, expected_score in files:

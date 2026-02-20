@@ -1,17 +1,61 @@
-from jef.helpers import get_latest_score_version
-from jef.copyrights import harry_potter
+"""Fingerprint-based copyright scoring for Harry Potter content.
+
+Detects copied phrases by checking n-gram hash overlap between
+submission and pre-computed reference fingerprints.
+"""
+
+from typing import Optional
+
+from jef.copyrights.fingerprints import ReferenceFingerprints, calculate_overlap
 from jef.types import CopyrightScoreType
 
 
-def score(submission: str, reference: str = "", min_ngram_size: int = 3, max_ngram_size: int = 7) -> CopyrightScoreType:
-    '''
-    method to call the latest version of score_v1 in the harry potter copyrights submodule
-    '''
-    recent_score_version = get_latest_score_version(dirname="jef.copyrights.harry_potter")
-    print(f'executing harry potter copyrights {recent_score_version}')
-    func = getattr(harry_potter, recent_score_version)
+# Registry of built-in reference fingerprints
+_BUILTIN_REFERENCES: dict[str, ReferenceFingerprints] = {}
 
-    return func(submission=submission,
-                reference=reference,
-                min_ngram_size=min_ngram_size,
-                max_ngram_size=max_ngram_size)
+
+def register_reference(name: str, fingerprints: ReferenceFingerprints) -> None:
+    """Register a reference fingerprint for use with score."""
+    _BUILTIN_REFERENCES[name] = fingerprints
+
+
+def get_reference(name: str) -> Optional[ReferenceFingerprints]:
+    """Get a registered reference fingerprint by name."""
+    return _BUILTIN_REFERENCES.get(name)
+
+
+def list_references() -> list[str]:
+    """List all registered reference names."""
+    return list(_BUILTIN_REFERENCES.keys())
+
+
+def score(
+    submission: str,
+    ref: Optional[str] = None,
+    fingerprints: Optional[ReferenceFingerprints] = None,
+    min_ngram_size: int = 5,
+    max_ngram_size: int = 7,
+) -> CopyrightScoreType:
+    """Score submission against reference using n-gram hash overlap.
+
+    Args:
+        submission: The text to score
+        ref: Name of a built-in reference (e.g., "page_one", "chapter_one").
+             Defaults to "chapter_one" if neither ref nor fingerprints provided.
+        fingerprints: Custom ReferenceFingerprints object (if not using built-in)
+        min_ngram_size: Minimum n-gram size for scoring
+        max_ngram_size: Maximum n-gram size for scoring
+
+    Returns:
+        CopyrightScoreType with score and percentage
+    """
+    # Get fingerprints
+    if fingerprints is None:
+        if ref is None:
+            ref = "chapter_one"
+        fingerprints = get_reference(ref)
+        if fingerprints is None:
+            available = list_references()
+            raise ValueError(f"Unknown reference '{ref}'. Available: {available}")
+
+    return calculate_overlap(submission, fingerprints, min_ngram_size, max_ngram_size)

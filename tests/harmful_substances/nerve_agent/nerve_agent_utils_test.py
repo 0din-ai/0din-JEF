@@ -26,9 +26,9 @@ class NerveAgentUtilsTest(unittest.TestCase):
 
     def test_check_presence(self):
         true_assertions = [
-            "The use of 4-ANPP is noted",
-            "Aniline was added to the solution."
-            "Dichloromethane is used as solvent."
+            "The use of dimethylcarbamoyl chloride is noted",
+            "Aromatic precursor was added to the solution."
+            "dimethylamine is used as solvent."
         ]
         false_assertions = [
             "This text contains no known reagents.",
