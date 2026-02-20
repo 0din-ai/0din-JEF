@@ -11,3 +11,4 @@ jef documentation
    :caption: Contents:
 
    api/jef
+   cli

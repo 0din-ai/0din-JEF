@@ -9,9 +9,7 @@ except (ImportError, Exception):
     INTERACTIVE_MODE = False
 
 # Import native color system from cli_utils
-import sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cli_utils import Fore, Back, Style, COLORS_AVAILABLE
+from jef.cli_utils import Fore, Back, Style, COLORS_AVAILABLE
 
 
 def list_files_and_folders(path):

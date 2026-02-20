@@ -92,7 +92,7 @@ def print_jef_header():
 {Fore.RED}+==============================================================================+
 {Fore.RED}|  {Fore.CYAN}     JJJ EEEEE FFFFF    {Fore.YELLOW}Jailbreak Evaluation Framework{Fore.RED}        |
 {Fore.RED}|  {Fore.CYAN}      J  E     F        {Fore.WHITE}Advanced AI Safety Assessment{Fore.RED}         |
-{Fore.RED}|  {Fore.CYAN}      J  EEE   FFF      {Fore.GREEN}Version 0.1.5{Fore.RED}                        |
+{Fore.RED}|  {Fore.CYAN}      J  EEE   FFF                                             {Fore.RED}|
 {Fore.RED}|  {Fore.CYAN}  J   J  E     F        {Fore.MAGENTA}by 0Din.ai{Fore.RED}                           |
 {Fore.RED}|  {Fore.CYAN}   JJJ   EEEEE F        {Fore.BLUE}https://0din.ai{Fore.RED}                      |
 {Fore.RED}|  {Fore.CYAN}                       {Fore.RED}                                                |

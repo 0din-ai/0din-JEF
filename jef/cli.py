@@ -2,16 +2,7 @@ import argparse
 import sys
 from jef import tiananmen, nerve_agent, meth, harry_potter, copyrights, score, calculator
 
-try:
-    from colorama import init, Fore, Back, Style
-    init(autoreset=True)  # Auto-reset colors after each print
-    COLORS_AVAILABLE = True
-except ImportError:
-    # Fallback if colorama not available
-    class MockColor:
-        def __getattr__(self, name): return ""
-    Fore = Back = Style = MockColor()
-    COLORS_AVAILABLE = False
+from jef.cli_utils import Fore, Back, Style, COLORS_AVAILABLE
 
 
 def print_enhanced_help():
