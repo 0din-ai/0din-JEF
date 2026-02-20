@@ -6,6 +6,11 @@ from jef.integrations import (
     JEFResult,
     SubstanceScorerDef,
     SUBSTANCE_SCORERS,
+    NdayProbeDef,
+    NDAY_PROBES,
+    DEFAULT_NDAY_TAGS,
+    snake_to_pascal,
+    nday_to_seed_dict,
     score_substance,
     score_copyright,
     get_score_func,
@@ -108,3 +113,143 @@ class TestScoreCopyright:
         result = score_copyright(BENIGN, ref="chapter_one")
         assert isinstance(result, JEFResult)
         assert "jef_score" in result.metadata
+
+
+# ---------------------------------------------------------------------------
+# snake_to_pascal
+# ---------------------------------------------------------------------------
+
+
+class TestSnakeToPascal:
+    def test_basic(self):
+        assert snake_to_pascal("placeholder_injection") == "PlaceholderInjection"
+
+    def test_single_word(self):
+        assert snake_to_pascal("correction") == "Correction"
+
+    def test_three_words(self):
+        assert snake_to_pascal("hex_recipe_book") == "HexRecipeBook"
+
+
+# ---------------------------------------------------------------------------
+# NdayProbeDef
+# ---------------------------------------------------------------------------
+
+
+class TestNdayProbeDef:
+    """NdayProbeDef loaded from config has all required fields."""
+
+    def test_fields(self):
+        defn = NdayProbeDef(
+            guid="test-guid",
+            description="Test description",
+            goal="test goal",
+            authors=["Tester", "0DIN"],
+            harm_categories=["security"],
+            prompts=["prompt1"],
+            recommended_detector=["0din_jef.TestDetector"],
+        )
+        assert defn.guid == "test-guid"
+        assert defn.description == "Test description"
+        assert defn.goal == "test goal"
+        assert defn.authors == ["Tester", "0DIN"]
+        assert defn.harm_categories == ["security"]
+        assert defn.prompts == ["prompt1"]
+        assert defn.recommended_detector == ["0din_jef.TestDetector"]
+
+    def test_disclosure_url(self):
+        defn = NdayProbeDef(
+            guid="abc-123",
+            description="",
+            goal="",
+            authors=[],
+            harm_categories=[],
+            prompts=[],
+            recommended_detector=[],
+        )
+        assert defn.disclosure_url == "https://0din.ai/disclosures/abc-123"
+
+    def test_frozen(self):
+        defn = NDAY_PROBES[next(iter(NDAY_PROBES))]
+        with pytest.raises(AttributeError):
+            defn.guid = "y"  # type: ignore[misc]
+
+
+class TestNdayProbesRegistry:
+    """NDAY_PROBES registry loaded from YAML config."""
+
+    EXPECTED_KEYS = {
+        "placeholder_injection",
+        "incremental_table_completion",
+        "technical_field_guide",
+        "chemical_compiler_debug",
+        "correction",
+        "hex_recipe_book",
+    }
+
+    def test_has_all_keys(self):
+        assert set(NDAY_PROBES.keys()) == self.EXPECTED_KEYS
+
+    def test_entries_are_nday_probe_defs(self):
+        for defn in NDAY_PROBES.values():
+            assert isinstance(defn, NdayProbeDef)
+
+    def test_all_have_guids(self):
+        for defn in NDAY_PROBES.values():
+            assert len(defn.guid) > 0
+
+    def test_all_have_descriptions(self):
+        for defn in NDAY_PROBES.values():
+            assert len(defn.description) > 0
+
+    def test_all_have_goals(self):
+        for defn in NDAY_PROBES.values():
+            assert len(defn.goal) > 0
+
+    def test_all_have_authors(self):
+        for defn in NDAY_PROBES.values():
+            assert len(defn.authors) >= 1
+
+    def test_all_have_prompts(self):
+        for defn in NDAY_PROBES.values():
+            assert len(defn.prompts) >= 1
+
+    def test_all_have_recommended_detectors(self):
+        for defn in NDAY_PROBES.values():
+            assert len(defn.recommended_detector) >= 1
+
+    def test_guids_are_unique(self):
+        guids = [defn.guid for defn in NDAY_PROBES.values()]
+        assert len(guids) == len(set(guids))
+
+
+# ---------------------------------------------------------------------------
+# nday_to_seed_dict
+# ---------------------------------------------------------------------------
+
+
+class TestNdayToSeedDict:
+    """nday_to_seed_dict produces valid PyRIT seed structure."""
+
+    def test_basic_structure(self):
+        name = "placeholder_injection"
+        defn = NDAY_PROBES[name]
+        result = nday_to_seed_dict(name, defn)
+
+        assert result["dataset_name"] == name
+        assert result["description"] == defn.description
+        assert "seeds" in result
+        assert len(result["seeds"]) == len(defn.prompts)
+
+    def test_seed_entries_carry_metadata(self):
+        name = "placeholder_injection"
+        defn = NDAY_PROBES[name]
+        result = nday_to_seed_dict(name, defn)
+
+        for seed in result["seeds"]:
+            assert seed["data_type"] == "text"
+            assert isinstance(seed["value"], str)
+            assert seed["harm_categories"] == list(defn.harm_categories)
+            assert seed["source"] == defn.disclosure_url
+            assert seed["authors"] == list(defn.authors)
+            assert seed["groups"] == ["0din_nday"]
