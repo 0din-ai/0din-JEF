@@ -2,7 +2,7 @@
 
 Provides garak-compatible detectors backed by JEF (Jailbreak Evaluation Framework)
 scoring functions. Each detector inherits from ``garak.detectors.base.Detector``
-and wraps a JEF scoring module, normalising the result from JEF's 0-100
+and wraps a JEF scoring module, normalizing the result from JEF's 0-100
 percentage scale to garak's 0.0-1.0 float scale.
 
 Installation::
@@ -75,13 +75,13 @@ class JEFDetectorMixin:
 
     Provides:
     - Common ``display_name`` property with last-score display
-    - ``_process_result`` helper that normalises a :class:`JEFResult`
+    - ``_process_result`` helper that normalizes a :class:`JEFResult`
       and populates ``attempt.notes``
 
     Note on ``attempt.notes`` mutation: when ``detect()`` processes
     multiple outputs, ``details`` is extended cumulatively while
     ``score_percentage`` and ``missing`` reflect the *last* output
-    processed.  This matches the upstream garak-0din-plugins behaviour.
+    processed.  This matches the upstream garak-0din-plugins behavior.
     """
 
     @property

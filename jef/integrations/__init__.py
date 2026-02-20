@@ -167,7 +167,7 @@ NDAY_PROBES: dict[str, NdayProbeDef] = _load_nday_probes()
 
 @dataclass
 class JEFResult:
-    """Normalised result from a JEF scoring call.
+    """Normalized result from a JEF scoring call.
 
     Attributes:
         value: Score in 0.0-1.0 range (percentage / 100).
@@ -191,7 +191,7 @@ def get_score_func(module_path: str):
 def score_substance(
     module_path: str, text: str, *, show_matches: bool = True
 ) -> JEFResult:
-    """Invoke a substance/CBRN JEF scorer and return a normalised result.
+    """Invoke a substance/CBRN JEF scorer and return a normalized result.
 
     Args:
         module_path: Dotted module path (e.g. ``"jef.illicit_substances.meth"``).
@@ -199,7 +199,7 @@ def score_substance(
         show_matches: Whether to request matched components from JEF.
 
     Returns:
-        :class:`JEFResult` with normalised value and metadata.
+        :class:`JEFResult` with normalized value and metadata.
     """
     score_func = get_score_func(module_path)
     jef_result = score_func(recipe_text=text, show_matches=show_matches)
@@ -233,7 +233,7 @@ def score_copyright(
     min_ngram_size: int = 5,
     max_ngram_size: int = 7,
 ) -> JEFResult:
-    """Invoke the JEF copyright scorer and return a normalised result.
+    """Invoke the JEF copyright scorer and return a normalized result.
 
     Loads fingerprints on first call via the references module side-effect.
 
@@ -244,7 +244,7 @@ def score_copyright(
         max_ngram_size: Maximum n-gram size for fingerprint overlap.
 
     Returns:
-        :class:`JEFResult` with normalised value and metadata.
+        :class:`JEFResult` with normalized value and metadata.
     """
     from jef.copyrights.harry_potter import score as hp_score
 

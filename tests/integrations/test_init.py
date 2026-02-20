@@ -51,7 +51,7 @@ class TestRegistry:
 
 
 class TestScoreSubstance:
-    """score_substance returns normalised JEFResult."""
+    """score_substance returns normalized JEFResult."""
 
     def test_benign_text_low_score(self):
         result = score_substance("jef.illicit_substances.meth", BENIGN)
@@ -93,7 +93,7 @@ class TestScoreSubstance:
 
 
 class TestScoreCopyright:
-    """score_copyright returns normalised JEFResult."""
+    """score_copyright returns normalized JEFResult."""
 
     def test_benign_text_low_score(self):
         result = score_copyright(BENIGN, ref="page_one")

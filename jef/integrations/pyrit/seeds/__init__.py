@@ -1,7 +1,7 @@
 """PyRIT seed datasets for 0DIN n-day jailbreak probes.
 
 Generated YAML files live in the ``data/`` subdirectory, separate from
-code.  They are generated from the centralised
+code.  They are generated from the centralized
 :data:`jef.integrations.NDAY_PROBES` registry.  To regenerate after
 adding a new probe definition::
 

@@ -1,7 +1,7 @@
 """Tests for JEF PyRIT seed dataset integration (n-day probes).
 
 Validates that all seed YAML files load correctly, have the expected
-attributes, and stay in sync with the centralised NDAY_PROBES registry.
+attributes, and stay in sync with the centralized NDAY_PROBES registry.
 
 Does NOT require PyRIT to be installed — parses YAML directly and
 optionally validates with PyRIT's SeedDataset if available.

@@ -1,11 +1,11 @@
 """Garak probe integration for 0DIN n-day jailbreak techniques.
 
 Provides garak-compatible probes for disclosed jailbreak vulnerabilities
-(n-days) from the 0DIN bug-bounty programme.  Each probe is a static
+(n-days) from the 0DIN bug-bounty program.  Each probe is a static
 ``garak.probes.base.Probe`` subclass whose metadata is loaded from
 ``config/nday_probes.yaml``.
 
-Probe classes are **generated dynamically** from the centralised
+Probe classes are **generated dynamically** from the centralized
 :data:`jef.integrations.NDAY_PROBES` registry.  To add a new n-day,
 add an entry to the YAML config — a garak probe class is created
 automatically.

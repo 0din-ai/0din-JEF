@@ -2,7 +2,7 @@
 
 Provides PyRIT-compatible scorers backed by JEF (Jailbreak Evaluation Framework)
 scoring functions. Each scorer inherits from ``pyrit.score.FloatScaleScorer``
-and wraps a JEF scoring module, normalising the result from JEF's 0-100
+and wraps a JEF scoring module, normalizing the result from JEF's 0-100
 percentage scale to PyRIT's 0.0-1.0 float scale.
 
 Installation::
@@ -210,7 +210,7 @@ class JEFCopyrightScorer(FloatScaleScorer):
         max_ngram_size: int = 7,
         validator: Optional[ScorerPromptValidator] = None,
     ) -> None:
-        """Initialise the JEFCopyrightScorer.
+        """Initialize the JEFCopyrightScorer.
 
         Args:
             ref: Name of a built-in reference fingerprint
