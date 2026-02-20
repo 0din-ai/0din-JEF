@@ -9,7 +9,7 @@ from jef.integrations import (
     NdayProbeDef,
     NDAY_PROBES,
     DEFAULT_NDAY_TAGS,
-    _snake_to_pascal,
+    snake_to_pascal,
     nday_to_seed_dict,
     score_substance,
     score_copyright,
@@ -116,19 +116,19 @@ class TestScoreCopyright:
 
 
 # ---------------------------------------------------------------------------
-# _snake_to_pascal
+# snake_to_pascal
 # ---------------------------------------------------------------------------
 
 
 class TestSnakeToPascal:
     def test_basic(self):
-        assert _snake_to_pascal("placeholder_injection") == "PlaceholderInjection"
+        assert snake_to_pascal("placeholder_injection") == "PlaceholderInjection"
 
     def test_single_word(self):
-        assert _snake_to_pascal("correction") == "Correction"
+        assert snake_to_pascal("correction") == "Correction"
 
     def test_three_words(self):
-        assert _snake_to_pascal("hex_recipe_book") == "HexRecipeBook"
+        assert snake_to_pascal("hex_recipe_book") == "HexRecipeBook"
 
 
 # ---------------------------------------------------------------------------

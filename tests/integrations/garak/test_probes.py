@@ -7,7 +7,6 @@ Skipped automatically when garak is not installed.
 """
 
 import importlib
-import inspect
 
 import pytest
 
@@ -15,12 +14,12 @@ garak = pytest.importorskip("garak", reason="garak not installed")
 
 from garak._plugins import load_plugin  # noqa: E402
 
-from jef.integrations import NDAY_PROBES, _snake_to_pascal  # noqa: E402
+from jef.integrations import NDAY_PROBES, snake_to_pascal  # noqa: E402
 
 # Derive probe names and GUIDs from the registry — no hardcoded lists
-PROBE_NAMES = [_snake_to_pascal(key) for key in NDAY_PROBES]
+PROBE_NAMES = [snake_to_pascal(key) for key in NDAY_PROBES]
 DISCLOSURE_GUIDS = {
-    _snake_to_pascal(key): defn.guid for key, defn in NDAY_PROBES.items()
+    snake_to_pascal(key): defn.guid for key, defn in NDAY_PROBES.items()
 }
 
 
@@ -130,7 +129,5 @@ class TestProbeAttributes:
         """Prompt count matches the registry definition."""
         probe = _load_probe(name)
         # Find the registry entry for this class name
-        defn = next(
-            d for key, d in NDAY_PROBES.items() if _snake_to_pascal(key) == name
-        )
+        defn = next(d for key, d in NDAY_PROBES.items() if snake_to_pascal(key) == name)
         assert len(probe.prompts) == len(defn.prompts)

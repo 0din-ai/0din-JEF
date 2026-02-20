@@ -51,13 +51,13 @@ from jef.integrations import (
     NDAY_PROBES,
     DEFAULT_NDAY_TAGS,
     NdayProbeDef,
-    _snake_to_pascal,
+    snake_to_pascal,
 )
 
 
 def _make_probe_class(name: str, defn: NdayProbeDef) -> type:
     """Dynamically create a garak Probe subclass from an :class:`NdayProbeDef`."""
-    class_name = _snake_to_pascal(name)
+    class_name = snake_to_pascal(name)
 
     def __init__(self, config_root=_config):
         super(cls, self).__init__(config_root)
@@ -92,7 +92,7 @@ def _build_probes() -> dict[str, type]:
     classes = {}
     for name, defn in NDAY_PROBES.items():
         cls = _make_probe_class(name, defn)
-        classes[_snake_to_pascal(name)] = cls
+        classes[snake_to_pascal(name)] = cls
     return classes
 
 

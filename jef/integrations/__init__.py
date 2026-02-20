@@ -132,7 +132,7 @@ class NdayProbeDef:
         return f"{ODIN_DISCLOSURES_BASE_URL}/{self.guid}"
 
 
-def _snake_to_pascal(name: str) -> str:
+def snake_to_pascal(name: str) -> str:
     """Convert a snake_case registry key to PascalCase class name."""
     return "".join(word.capitalize() for word in name.split("_"))
 
