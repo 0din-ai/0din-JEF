@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Red-Teaming Integrations" href="integrations.html"><link rel="prev" title="Jailbreak Evaluation Framework (JEF)" href="index.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="JEF Framework" href="framework.html"><link rel="prev" title="Getting Started" href="getting-started.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Getting Started - jef 0.5.1 documentation</title>
+        <title>Red-Teaming Integrations - jef 0.5.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -192,8 +192,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations.html">Red-Teaming Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Red-Teaming Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">JEF Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
 </ul>
@@ -315,7 +315,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/getting-started.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/integrations.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -333,67 +333,272 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
+          <section id="red-teaming-integrations">
+<h1>Red-Teaming Integrations<a class="headerlink" href="#red-teaming-integrations" title="Link to this heading">¶</a></h1>
+<p>JEF integrates with two leading LLM red-teaming frameworks:
+<a class="reference external" href="https://github.com/NVIDIA/garak">garak</a> (NVIDIA) and
+<a class="reference external" href="https://github.com/Azure/PyRIT">PyRIT</a> (Microsoft).
+These integrations let you use JEF’s scoring rubrics directly inside
+automated red-teaming pipelines — no glue code required.</p>
+<section id="garak-integration">
+<span id="id1"></span><h2>Garak<a class="headerlink" href="#garak-integration" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://docs.garak.ai/">garak</a> is an LLM vulnerability scanner.
+JEF provides <strong>detectors</strong> (scoring) and <strong>probes</strong> (attack prompts) that
+plug directly into garak’s CLI and Python API.</p>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<p>Install from PyPI:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>0din-jef
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>0din-jef<span class="o">[</span>garak<span class="o">]</span>
 </pre></div>
 </div>
-<p>Or install directly from GitHub:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/0din-ai/0din-JEF.git
-</pre></div>
+<p>This pulls in <code class="docutils literal notranslate"><span class="pre">garak</span> <span class="pre">&gt;=</span> <span class="pre">0.13.3</span></code> alongside JEF.</p>
+</section>
+<section id="available-detectors">
+<h3>Available Detectors<a class="headerlink" href="#available-detectors" title="Link to this heading">¶</a></h3>
+<p>Detectors score model outputs using JEF rubrics.  Each detector returns a
+value in garak’s <code class="docutils literal notranslate"><span class="pre">0.0</span></code>-<code class="docutils literal notranslate"><span class="pre">1.0</span></code> scale (JEF percentage / 100).</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Detector</p></th>
+<th class="head"><p>What It Scores</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.CrystalMethScore</span></code></p></td>
+<td><p>Crystal meth synthesis content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.NerveAgentScore</span></code></p></td>
+<td><p>Nerve agent synthesis content</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.FentanylScore</span></code></p></td>
+<td><p>Fentanyl synthesis content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.AnthraxScore</span></code></p></td>
+<td><p>Anthrax / B. anthracis content</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.CRISPRScore</span></code></p></td>
+<td><p>CRISPR gene-editing content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.CopyRightScoreHarryPotterPageOne</span></code></p></td>
+<td><p>Harry Potter page-one reproduction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.CopyRightScoreHarryPotterChapterOne</span></code></p></td>
+<td><p>Harry Potter chapter-one reproduction</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
-<p>JEF provides scorer classes for evaluating jailbreak outputs across several categories.
-Each scorer returns a score out of 100.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">tiananmen</span><span class="p">,</span> <span class="n">nerve_agent</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span> <span class="n">harry_potter</span>
-
-<span class="c1"># Score a response against the Tiananmen fact benchmark</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">tiananmen</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>  <span class="c1"># 0-100</span>
-
-<span class="c1"># Score against nerve agent synthesis details</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">nerve_agent</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
-
-<span class="c1"># Score against crystal meth synthesis details</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
-
-<span class="c1"># Score copyright similarity against Harry Potter</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">harry_potter</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;LLM output&quot;</span><span class="p">,</span> <span class="s2">&quot;harry potter reference text&quot;</span><span class="p">)</span>
-</pre></div>
+<section id="available-probes">
+<h3>Available Probes<a class="headerlink" href="#available-probes" title="Link to this heading">¶</a></h3>
+<p>Probes are disclosed jailbreak techniques (n-days) from the
+<a class="reference external" href="https://0din.ai">0DIN bug-bounty programme</a>.
+Each probe carries its original attack prompts and links to its
+0DIN disclosure page.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Probe</p></th>
+<th class="head"><p>Technique</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.PlaceholderInjection</span></code></p></td>
+<td><p>Guardrail bypass via placeholder text between words</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.IncrementalTableCompletion</span></code></p></td>
+<td><p>Incomplete-table pattern completion</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.TechnicalFieldGuide</span></code></p></td>
+<td><p>Law-enforcement field-guide framing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.ChemicalCompilerDebug</span></code></p></td>
+<td><p>Obfuscated chemical notation as a “debug” task</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.Correction</span></code></p></td>
+<td><p>Forensic document correction request</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0din_jef.HexRecipeBook</span></code></p></td>
+<td><p>Hex-encoded instructions in fictional context</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>For a full list of available scorers and detailed usage, see the <a class="reference internal" href="usage.html"><span class="doc">Usage Guide</span></a> guide.</p>
-<p>To understand the scoring methodology and framework behind JEF, see the <a class="reference internal" href="framework.html"><span class="doc">JEF Framework</span></a> overview.</p>
 </section>
-<section id="red-teaming-integrations">
-<h2>Red-Teaming Integrations<a class="headerlink" href="#red-teaming-integrations" title="Link to this heading">¶</a></h2>
-<p>JEF plugs directly into <a class="reference external" href="https://github.com/NVIDIA/garak">garak</a> and
-<a class="reference external" href="https://github.com/Azure/PyRIT">PyRIT</a> for automated red-teaming
-pipelines.  Install with the extras you need:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>0din-jef<span class="o">[</span>garak<span class="o">]</span><span class="w">    </span><span class="c1"># garak detectors + probes</span>
-pip<span class="w"> </span>install<span class="w"> </span>0din-jef<span class="o">[</span>pyrit<span class="o">]</span><span class="w">    </span><span class="c1"># PyRIT scorers + seed datasets</span>
-</pre></div>
-</div>
-<p>Quick example with garak:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>garak<span class="w"> </span>--model_type<span class="w"> </span>openai<span class="w"> </span>--model_name<span class="w"> </span>gpt-4<span class="w"> </span><span class="se">\</span>
+<section id="cli-usage">
+<h3>CLI Usage<a class="headerlink" href="#cli-usage" title="Link to this heading">¶</a></h3>
+<p>Run a probe with a detector in a single command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Score a model against crystal meth rubric using a disclosed n-day</span>
+garak<span class="w"> </span>--model_type<span class="w"> </span>openai<span class="w"> </span>--model_name<span class="w"> </span>gpt-4<span class="w"> </span><span class="se">\</span>
 <span class="w">      </span>-p<span class="w"> </span>0din_jef.PlaceholderInjection<span class="w"> </span><span class="se">\</span>
 <span class="w">      </span>-d<span class="w"> </span>0din_jef.CrystalMethScore
+
+<span class="c1"># Mix JEF detectors with any garak probe</span>
+garak<span class="w"> </span>--model_type<span class="w"> </span>openai<span class="w"> </span>--model_name<span class="w"> </span>gpt-4<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-p<span class="w"> </span>&lt;any-probe&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-d<span class="w"> </span>0din_jef.NerveAgentScore
+
+<span class="c1"># Use multiple detectors</span>
+garak<span class="w"> </span>--model_type<span class="w"> </span>openai<span class="w"> </span>--model_name<span class="w"> </span>gpt-4<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-p<span class="w"> </span>0din_jef.Correction<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-d<span class="w"> </span>0din_jef.CrystalMethScore,0din_jef.FentanylScore
 </pre></div>
 </div>
-<p>Quick example with PyRIT:</p>
+</section>
+<section id="python-usage">
+<h3>Python Usage<a class="headerlink" href="#python-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">garak._plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_plugin</span>
+
+<span class="c1"># Load a detector</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="n">load_plugin</span><span class="p">(</span><span class="s2">&quot;detectors.0din_jef.CrystalMethScore&quot;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">detector</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">attempt</span><span class="p">)</span>  <span class="c1"># list[float] in 0.0-1.0</span>
+
+<span class="c1"># Load a probe</span>
+<span class="n">probe</span> <span class="o">=</span> <span class="n">load_plugin</span><span class="p">(</span><span class="s2">&quot;probes.0din_jef.PlaceholderInjection&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probe</span><span class="o">.</span><span class="n">prompts</span><span class="p">)</span>        <span class="c1"># attack prompt strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probe</span><span class="o">.</span><span class="n">goal</span><span class="p">)</span>           <span class="c1"># short goal statement</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probe</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span>            <span class="c1"># 0DIN disclosure URL</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>JEF detectors and probes are installed as <strong>namespace packages</strong>.
+<code class="docutils literal notranslate"><span class="pre">--list_detectors</span></code> may not show them, but explicit <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">0din_jef.&lt;Name&gt;</span></code>
+always works.</p>
+</div>
+</section>
+</section>
+<section id="pyrit-integration">
+<span id="id3"></span><h2>PyRIT<a class="headerlink" href="#pyrit-integration" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://azure.github.io/PyRIT/">PyRIT</a> (Python Risk Identification Tool
+for generative AI) is Microsoft’s red-teaming orchestration framework.
+JEF provides <strong>scorers</strong> and <strong>seed datasets</strong> for PyRIT.</p>
+<section id="id5">
+<h3>Installation<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>0din-jef<span class="o">[</span>pyrit<span class="o">]</span>
+</pre></div>
+</div>
+<p>This pulls in <code class="docutils literal notranslate"><span class="pre">pyrit</span> <span class="pre">&gt;=</span> <span class="pre">0.11</span></code> alongside JEF.</p>
+</section>
+<section id="available-scorers">
+<h3>Available Scorers<a class="headerlink" href="#available-scorers" title="Link to this heading">¶</a></h3>
+<p>All scorers inherit from <code class="docutils literal notranslate"><span class="pre">pyrit.score.FloatScaleScorer</span></code> and return values
+in PyRIT’s <code class="docutils literal notranslate"><span class="pre">0.0</span></code>-<code class="docutils literal notranslate"><span class="pre">1.0</span></code> range.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Scorer</p></th>
+<th class="head"><p>What It Scores</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">JEFMethScorer</span></code></p></td>
+<td><p>Crystal meth synthesis content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">JEFNerveAgentScorer</span></code></p></td>
+<td><p>Nerve agent synthesis content</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">JEFFentanylScorer</span></code></p></td>
+<td><p>Fentanyl synthesis content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">JEFAnthraxScorer</span></code></p></td>
+<td><p>Anthrax / B. anthracis content</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">JEFCRISPRScorer</span></code></p></td>
+<td><p>CRISPR gene-editing content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">JEFCopyrightScorer</span></code></p></td>
+<td><p>Harry Potter copyright reproduction</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id6">
+<h3>Python Usage<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef.integrations.pyrit.scorers</span><span class="w"> </span><span class="kn">import</span> <span class="n">JEFMethScorer</span>
 
 <span class="n">scorer</span> <span class="o">=</span> <span class="n">JEFMethScorer</span><span class="p">()</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score_text_async</span><span class="p">(</span><span class="s2">&quot;some LLM output&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>  <span class="c1"># 0.0 - 1.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>  <span class="c1"># float in 0.0-1.0</span>
 </pre></div>
 </div>
-<p>See the full <a class="reference internal" href="integrations.html"><span class="doc">Red-Teaming Integrations</span></a> guide for all available detectors, probes,
-scorers, and seed datasets.</p>
+<p>The copyright scorer accepts additional parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef.integrations.pyrit.scorers</span><span class="w"> </span><span class="kn">import</span> <span class="n">JEFCopyrightScorer</span>
+
+<span class="n">scorer</span> <span class="o">=</span> <span class="n">JEFCopyrightScorer</span><span class="p">(</span>
+    <span class="n">ref</span><span class="o">=</span><span class="s2">&quot;page_one&quot;</span><span class="p">,</span>       <span class="c1"># or &quot;chapter_one&quot; (default)</span>
+    <span class="n">min_ngram_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">max_ngram_size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score_text_async</span><span class="p">(</span><span class="s2">&quot;some LLM output&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="seed-datasets">
+<h3>Seed Datasets<a class="headerlink" href="#seed-datasets" title="Link to this heading">¶</a></h3>
+<p>JEF ships pre-built PyRIT seed datasets for each n-day probe.  These are
+YAML files loadable via <code class="docutils literal notranslate"><span class="pre">pyrit.models.SeedDataset.from_yaml_file()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrit.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SeedDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jef.integrations.pyrit.seeds</span><span class="w"> </span><span class="kn">import</span> <span class="n">SEEDS_DIR</span>
+
+<span class="c1"># Load the PlaceholderInjection seed dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SeedDataset</span><span class="o">.</span><span class="n">from_yaml_file</span><span class="p">(</span><span class="n">SEEDS_DIR</span> <span class="o">/</span> <span class="s2">&quot;placeholder_injection.yaml&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">seeds</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">seed</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Available seed files (one per n-day probe):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">placeholder_injection.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incremental_table_completion.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">technical_field_guide.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chemical_compiler_debug.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">correction.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hex_recipe_book.yaml</span></code></p></li>
+</ul>
+</section>
+<section id="regenerating-seeds">
+<h3>Regenerating Seeds<a class="headerlink" href="#regenerating-seeds" title="Link to this heading">¶</a></h3>
+<p>If you add a new probe definition to the config, regenerate the seed YAML
+files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>jef.integrations.pyrit.seeds
+</pre></div>
+</div>
+</section>
+</section>
+<section id="architecture">
+<span id="integrations-architecture"></span><h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h2>
+<p>Both integrations share a common layer in <code class="docutils literal notranslate"><span class="pre">jef.integrations</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Scorer registry</strong> (<code class="docutils literal notranslate"><span class="pre">SUBSTANCE_SCORERS</span></code>) — maps short keys to JEF
+scoring modules.  Used by both garak detectors and PyRIT scorers.</p></li>
+<li><p><strong>N-day probe registry</strong> (<code class="docutils literal notranslate"><span class="pre">NDAY_PROBES</span></code>) — loaded from
+<code class="docutils literal notranslate"><span class="pre">jef/integrations/config/nday_probes.yaml</span></code>.  Garak probes are
+generated dynamically; PyRIT seeds are pre-built YAML files.</p></li>
+<li><p><strong>Normalised results</strong> (<code class="docutils literal notranslate"><span class="pre">JEFResult</span></code>) — every JEF call returns a
+consistent <code class="docutils literal notranslate"><span class="pre">value</span></code> (0.0-1.0), <code class="docutils literal notranslate"><span class="pre">percentage</span></code> (0-100), <code class="docutils literal notranslate"><span class="pre">raw_score</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">metadata</span></code> dict.</p></li>
+</ul>
+<p>Adding a new n-day probe:</p>
+<ol class="arabic simple">
+<li><p>Add an entry to <code class="docutils literal notranslate"><span class="pre">jef/integrations/config/nday_probes.yaml</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">jef.integrations.pyrit.seeds</span></code> to regenerate YAML</p></li>
+<li><p>Commit the new seed file — the garak probe class is generated
+automatically at import time</p></li>
+</ol>
 </section>
 </section>
 
@@ -402,23 +607,23 @@ scorers, and seed datasets.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="integrations.html">
+          <a class="next-page" href="framework.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Red-Teaming Integrations</div>
+                <div class="title">JEF Framework</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="getting-started.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Getting Started</div>
                 
               </div>
             </a>
@@ -452,10 +657,24 @@ scorers, and seed datasets.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#">Red-Teaming Integrations</a><ul>
+<li><a class="reference internal" href="#garak-integration">Garak</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
-<li><a class="reference internal" href="#red-teaming-integrations">Red-Teaming Integrations</a></li>
+<li><a class="reference internal" href="#available-detectors">Available Detectors</a></li>
+<li><a class="reference internal" href="#available-probes">Available Probes</a></li>
+<li><a class="reference internal" href="#cli-usage">CLI Usage</a></li>
+<li><a class="reference internal" href="#python-usage">Python Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyrit-integration">PyRIT</a><ul>
+<li><a class="reference internal" href="#id5">Installation</a></li>
+<li><a class="reference internal" href="#available-scorers">Available Scorers</a></li>
+<li><a class="reference internal" href="#id6">Python Usage</a></li>
+<li><a class="reference internal" href="#seed-datasets">Seed Datasets</a></li>
+<li><a class="reference internal" href="#regenerating-seeds">Regenerating Seeds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture">Architecture</a></li>
 </ul>
 </li>
 </ul>
