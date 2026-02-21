@@ -34,7 +34,7 @@ class NativeColors:
                 # Enable ANSI escape sequence processing
                 kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
                 return True
-            except:
+            except Exception:
                 # Fallback: check Windows version
                 version = platform.version()
                 if version and float(version.split('.')[0]) >= 10:

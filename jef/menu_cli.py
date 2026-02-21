@@ -5,7 +5,7 @@ from jef import tiananmen, nerve_agent, meth, harry_potter, copyrights
 try:
     import questionary
     INTERACTIVE_MODE = True
-except (ImportError, Exception):
+except Exception:
     INTERACTIVE_MODE = False
 
 # Import native color system from cli_utils
@@ -61,9 +61,6 @@ def interactive_menu():
 
         if selection is None: 
             break
-        
-        if selection is None:
-            break
             
         if "[EXIT]" in selection:
             print(f"{Fore.GREEN}Thank you for using JEF! Stay safe!{Style.RESET_ALL}")
@@ -91,7 +88,6 @@ def score_file_interactive(file_name, file_content):
         "Nerve Agent Detection": ("nerve_agent", nerve_agent.score),
         "Methamphetamine Detection": ("meth", meth.score),
         "Harry Potter Copyright": ("harry_potter", harry_potter.score),
-        "General Copyright Detection": ("copyright", copyrights.score),
     }
     
     choices = list(scoring_functions.keys()) + ["Back to file browser"]
@@ -121,14 +117,22 @@ def score_file_interactive(file_name, file_content):
     test_type, func = func_info
 
     if test_type in ["harry_potter", "copyright"]:
-        reference_text = questionary.text(
-            f"{Fore.WHITE}Enter the reference text to compare against:",
-            style=questionary.Style([('question', 'fg:#ffffff')])
-        ).ask()
+        if test_type == "harry_potter":
+            reference_text = questionary.select(
+                "Choose reference:",
+                choices=["page_one", "chapter_one"]
+            ).ask()
+        else:
+            reference_text = questionary.text(
+                "Enter the reference text to compare against:"
+            ).ask()
         if reference_text:
             print_info(f"Running {test_type} analysis...")
             try:
-                result = func(file_content, reference_text)
+                if test_type == "harry_potter":
+                    result = func(file_content, ref=reference_text)
+                else:
+                    result = func(file_content, reference_text)
                 print_result(result, f"{test_type.replace('_', ' ').title()} Analysis")
             except Exception as e:
                 print(f"{Fore.RED}Error during analysis: {e}{Style.RESET_ALL}")
@@ -148,7 +152,7 @@ def score_file_interactive(file_name, file_content):
 
 
 def fallback_menu():
-    print_fallback_menu_header()
+    print_menu_header()
     from jef.cli_utils import print_result, print_info, print_error
     
     current_path = os.getcwd()
@@ -204,7 +208,6 @@ def score_file_fallback(file_name, file_content):
         "2": ("Nerve Agent Detection", nerve_agent.score),
         "3": ("Methamphetamine Detection", meth.score),
         "4": ("Harry Potter Copyright", harry_potter.score),
-        "5": ("General Copyright Detection", copyrights.score),
     }
     
     print(f"{Fore.WHITE}Choose analysis type:")
@@ -223,11 +226,28 @@ def score_file_fallback(file_name, file_content):
     func_name, func = scoring_functions[choice]
 
     if "Copyright" in func_name:
-        reference_text = input(f"{Fore.WHITE}Enter the reference text: {Style.RESET_ALL}")
+        if func_name == "Harry Potter Copyright":
+            print(f"{Fore.WHITE}Choose reference:{Style.RESET_ALL}")
+            print(f"  {Fore.CYAN}1. page_one{Style.RESET_ALL}")
+            print(f"  {Fore.CYAN}2. chapter_one{Style.RESET_ALL}")
+            ref_choice = input(f"{Fore.MAGENTA}> {Style.RESET_ALL}").strip()
+            if ref_choice == "1":
+                reference_text = "page_one"
+            elif ref_choice == "2":
+                reference_text = "chapter_one"
+            else:
+                reference_text = None
+                print_error("Invalid choice.")
+        else:
+            reference_text = input(f"{Fore.WHITE}Enter the reference text: {Style.RESET_ALL}")
+            
         if reference_text:
             print_info(f"Running {func_name.lower()}...")
             try:
-                result = func(file_content, reference_text)
+                if func_name == "Harry Potter Copyright":
+                    result = func(file_content, ref=reference_text)
+                else:
+                    result = func(file_content, reference_text)
                 print_result(result, func_name)
             except Exception as e:
                 print_error(f"Analysis failed: {e}")
@@ -243,13 +263,6 @@ def score_file_fallback(file_name, file_content):
         
         input(f"\n{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
 
-
-def print_fallback_menu_header():
-    """Print the JEF menu header for fallback mode"""
-    from jef.cli_utils import print_jef_header, print_section_header
-    print_jef_header()
-    print_section_header("Interactive File Browser & JEF Analyzer")
-    print(f"{Fore.WHITE}Navigate through files and analyze them with JEF scoring algorithms{Style.RESET_ALL}\n")
 
 
 def main():

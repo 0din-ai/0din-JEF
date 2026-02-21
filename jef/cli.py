@@ -2,7 +2,7 @@ import argparse
 import sys
 from jef import tiananmen, nerve_agent, meth, harry_potter, copyrights, score, calculator
 
-from jef.cli_utils import Fore, Back, Style, COLORS_AVAILABLE
+from jef.cli_utils import Fore, Style, COLORS_AVAILABLE
 
 
 def print_enhanced_help():
@@ -66,14 +66,9 @@ def main():
                                     help="Score text against Harry Potter text.",
                                     description="Check for Harry Potter copyright violations")
     hp_parser.add_argument("text", help="Text to check for copyright violation")
-    hp_parser.add_argument("reference", help="Harry Potter reference text to compare against")
+    hp_parser.add_argument("--ref", default="chapter_one", choices=["page_one", "chapter_one"],
+                           help="Built-in reference to compare against (default: chapter_one)")
 
-    # CopyrightDetector
-    copyright_parser = subparsers.add_parser("copyright_detector", 
-                                           help="Detect copyright infringement.",
-                                           description="General copyright infringement detection")
-    copyright_parser.add_argument("text", help="Text to check for copyright violation")
-    copyright_parser.add_argument("reference", help="Reference text to compare against")
 
     # JEFScore
     jef_score_parser = subparsers.add_parser("jef_score", 
@@ -133,19 +128,12 @@ def main():
     elif args.command == "copyright_score_hp":
         print_info("Checking for Harry Potter copyright violations...")
         try:
-            result = harry_potter.score(args.text, args.reference)
+            result = harry_potter.score(args.text, ref=args.ref)
             print_result(result, "Harry Potter Copyright Analysis")
         except Exception as e:
             print_error(f"Analysis failed: {e}")
             
-    elif args.command == "copyright_detector":
-        print_info("Performing general copyright analysis...")
-        try:
-            result = copyrights.score(args.text, args.reference)
-            print_result(result, "Copyright Analysis")
-        except Exception as e:
-            print_error(f"Analysis failed: {e}")
-            
+
     elif args.command == "jef_score":
         print_info("Calculating JEF score from component values...")
         try:

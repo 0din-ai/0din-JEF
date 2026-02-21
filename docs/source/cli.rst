@@ -64,8 +64,6 @@ To start the interactive menu, execute the ``jef.menu_cli`` module directly with
 
     python -m jef.menu_cli
 
-*Note: There is also a ``run_jef_menu.bat`` script for convenience on Windows.*
-
 User Flow
 ~~~~~~~~~
 
