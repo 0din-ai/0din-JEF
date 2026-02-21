@@ -3,13 +3,26 @@
 Both garak and PyRIT adapters delegate to the helpers here so that
 JEF call signatures, percentage normalisation, and metadata extraction
 live in one place.
+
+The :data:`NDAY_PROBES` registry is the **single source of truth** for
+n-day probe definitions, loaded from ``config/nday_probes.yaml``.
+Both garak probe classes and PyRIT seed YAML files are derived from
+it — add a new entry to the config and both integrations pick it up
+automatically (garak probes are generated dynamically; run
+``python -m jef.integrations.pyrit.seeds`` to regenerate YAML files).
+
+The registry is self-contained with no network dependencies, so it
+works in air-gapped environments.
 """
 
 from __future__ import annotations
 
 import importlib
+import pathlib
 from dataclasses import dataclass, field
 from typing import Any
+
+import yaml
 
 
 # ---------------------------------------------------------------------------
@@ -68,13 +81,93 @@ SUBSTANCE_SCORERS: dict[str, SubstanceScorerDef] = {
 
 
 # ---------------------------------------------------------------------------
+# N-day probe registry  (loaded from config/nday_probes.yaml)
+# ---------------------------------------------------------------------------
+
+ODIN_DISCLOSURES_BASE_URL = "https://0din.ai/disclosures"
+"""Base URL for 0DIN public disclosure pages."""
+
+DEFAULT_NDAY_TAGS: list[str] = [
+    "avid-effect:security:S0403",
+    "avid-effect:ethics:E0301",
+    "owasp:llm01",
+    "quality:Security:PromptStability",
+]
+"""Default garak/AVID tags applied to all n-day probes."""
+
+_CONFIG_DIR = pathlib.Path(__file__).parent / "config"
+
+
+@dataclass(frozen=True)
+class NdayProbeDef:
+    """Definition for a disclosed jailbreak technique (n-day probe).
+
+    Loaded from ``config/nday_probes.yaml``.  Self-contained — no
+    network dependencies, works in air-gapped environments.
+    """
+
+    guid: str
+    """0DIN case GUID (UUID)."""
+
+    description: str
+    """Human-readable summary of the technique."""
+
+    goal: str
+    """Short goal statement (used by garak)."""
+
+    authors: list[str]
+    """Credited researchers."""
+
+    harm_categories: list[str]
+    """PyRIT harm category labels."""
+
+    prompts: list[str]
+    """Attack prompt variants."""
+
+    recommended_detector: list[str]
+    """Garak detector name(s) to pair with this probe."""
+
+    @property
+    def disclosure_url(self) -> str:
+        return f"{ODIN_DISCLOSURES_BASE_URL}/{self.guid}"
+
+
+def snake_to_pascal(name: str) -> str:
+    """Convert a snake_case registry key to PascalCase class name."""
+    return "".join(word.capitalize() for word in name.split("_"))
+
+
+def _load_nday_probes() -> dict[str, NdayProbeDef]:
+    """Load n-day probe definitions from the YAML config file."""
+    config_path = _CONFIG_DIR / "nday_probes.yaml"
+    with open(config_path, encoding="utf-8") as f:
+        raw = yaml.safe_load(f)
+
+    probes: dict[str, NdayProbeDef] = {}
+    for name, entry in raw.items():
+        probes[name] = NdayProbeDef(
+            guid=entry["guid"],
+            description=entry["description"],
+            goal=entry["goal"],
+            authors=entry["authors"],
+            harm_categories=entry["harm_categories"],
+            prompts=[p.rstrip("\n") for p in entry["prompts"]],
+            recommended_detector=entry["recommended_detector"],
+        )
+    return probes
+
+
+NDAY_PROBES: dict[str, NdayProbeDef] = _load_nday_probes()
+
+
+# ---------------------------------------------------------------------------
 # JEF invocation helpers
 # ---------------------------------------------------------------------------
 
 
 @dataclass
 class JEFResult:
-    """Normalised result from a JEF scoring call.
+    """Normalized result from a JEF scoring call.
 
     Attributes:
         value: Score in 0.0-1.0 range (percentage / 100).
@@ -98,7 +191,7 @@ def get_score_func(module_path: str):
 def score_substance(
     module_path: str, text: str, *, show_matches: bool = True
 ) -> JEFResult:
-    """Invoke a substance/CBRN JEF scorer and return a normalised result.
+    """Invoke a substance/CBRN JEF scorer and return a normalized result.
 
     Args:
         module_path: Dotted module path (e.g. ``"jef.illicit_substances.meth"``).
@@ -106,7 +199,7 @@ def score_substance(
         show_matches: Whether to request matched components from JEF.
 
     Returns:
-        :class:`JEFResult` with normalised value and metadata.
+        :class:`JEFResult` with normalized value and metadata.
     """
     score_func = get_score_func(module_path)
     jef_result = score_func(recipe_text=text, show_matches=show_matches)
@@ -140,7 +233,7 @@ def score_copyright(
     min_ngram_size: int = 5,
     max_ngram_size: int = 7,
 ) -> JEFResult:
-    """Invoke the JEF copyright scorer and return a normalised result.
+    """Invoke the JEF copyright scorer and return a normalized result.
 
     Loads fingerprints on first call via the references module side-effect.
 
@@ -151,7 +244,7 @@ def score_copyright(
         max_ngram_size: Maximum n-gram size for fingerprint overlap.
 
     Returns:
-        :class:`JEFResult` with normalised value and metadata.
+        :class:`JEFResult` with normalized value and metadata.
     """
     from jef.copyrights.harry_potter import score as hp_score
 
@@ -180,3 +273,38 @@ def score_copyright(
         raw_score=jef_result["score"],
         metadata=metadata,
     )
+
+
+# ---------------------------------------------------------------------------
+# PyRIT seed YAML generation
+# ---------------------------------------------------------------------------
+
+
+def nday_to_seed_dict(name: str, probe: NdayProbeDef) -> dict[str, Any]:
+    """Convert a :class:`NdayProbeDef` to a PyRIT seed YAML-compatible dict.
+
+    Args:
+        name: Registry key (snake_case identifier).
+        probe: The probe definition.
+
+    The returned dict can be written to YAML and loaded by
+    ``pyrit.models.SeedDataset.from_yaml_file()``.  Uses the PyRIT
+    ``seeds:`` format where each seed carries its own metadata.
+    """
+    seeds = []
+    for prompt in probe.prompts:
+        seeds.append(
+            {
+                "value": prompt,
+                "data_type": "text",
+                "harm_categories": list(probe.harm_categories),
+                "source": probe.disclosure_url,
+                "authors": list(probe.authors),
+                "groups": ["0din_nday"],
+            }
+        )
+    return {
+        "dataset_name": name,
+        "description": probe.description,
+        "seeds": seeds,
+    }

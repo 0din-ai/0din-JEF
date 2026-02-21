@@ -14,6 +14,7 @@ models, topics, and scenarios.
    :caption: Documentation:
 
    getting-started
+   integrations
    framework
    usage
 

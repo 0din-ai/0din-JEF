@@ -4,7 +4,7 @@ dynamic = ["version"]
 description = "Jailbreak Evaluation Module"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = ["pyyaml>=6"]
 
 authors = [
     { name = "jiwu-moz" }
@@ -36,12 +36,17 @@ jef-menu = "jef.menu_cli:main"
 
 # namespaces=true enables PEP 420 implicit namespace package scanning,
 # required because garak/ bridge dirs have no __init__.py.
-# "garak.detectors" is needed to ship garak/detectors/0din_jef.py (the
-# namespace bridge).  PyRIT needs no bridge — its scorers live under jef/*.
+# "garak.detectors" and "garak.probes" are needed to ship bridge modules
+# (the namespace bridges).  PyRIT needs no bridge — its scorers live under jef/*.
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["jef*", "garak.detectors"]
+include = ["jef*", "garak.detectors", "garak.probes"]
 namespaces = true
+
+# Include config and generated YAML files
+[tool.setuptools.package-data]
+"jef.integrations" = ["config/*.yaml"]
+"jef.integrations.pyrit.seeds" = ["data/*.yaml"]
 
 [tool.semantic_release]
 # Version is read from git tags, no files updated
