@@ -59,7 +59,7 @@ Available Probes
 ^^^^^^^^^^^^^^^^
 
 Probes are disclosed jailbreak techniques (n-days) from the
-`0DIN bug-bounty programme <https://0din.ai>`_.
+`0DIN bug-bounty program <https://0din.ai>`_.
 Each probe carries its original attack prompts and links to its
 0DIN disclosure page.
 
@@ -250,7 +250,7 @@ Both integrations share a common layer in ``jef.integrations``:
 - **N-day probe registry** (``NDAY_PROBES``) — loaded from
   ``jef/integrations/config/nday_probes.yaml``.  Garak probes are
   generated dynamically; PyRIT seeds are pre-built YAML files.
-- **Normalised results** (``JEFResult``) — every JEF call returns a
+- **Normalized results** (``JEFResult``) — every JEF call returns a
   consistent ``value`` (0.0-1.0), ``percentage`` (0-100), ``raw_score``,
   and ``metadata`` dict.
 
