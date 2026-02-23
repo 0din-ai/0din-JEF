@@ -12,6 +12,7 @@ authors = [
 
 
 [project.optional-dependencies]
+cli = ["questionary"]
 dev = ["pytest", "requests", "pytest-asyncio"]
 garak = ["garak>=0.13.3"]
 pyrit = ["pyrit>=0.11"]
@@ -24,6 +25,10 @@ Repository = "https://github.com/0din-ai/0din-JEF"
 [build-system]
 requires = ["setuptools>=61.0", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
+
+[project.scripts]
+jef = "jef.cli:main"
+jef-menu = "jef.menu_cli:main"
 
 [tool.setuptools_scm]
 # Version is derived from git tags automatically

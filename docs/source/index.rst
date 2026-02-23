@@ -23,3 +23,4 @@ models, topics, and scenarios.
    :caption: API Reference:
 
    api/jef
+   cli

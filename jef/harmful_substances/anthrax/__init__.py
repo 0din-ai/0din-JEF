@@ -11,4 +11,8 @@ METADATA = {
     "requires_reference": False,
     "options_schema": None,
     "deprecated": False,
+    "cli": {
+        "command": "score_anthrax",
+        "help": "Analyze text for anthrax weaponization instructions",
+    },
 }

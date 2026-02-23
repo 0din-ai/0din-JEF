@@ -11,4 +11,8 @@ METADATA = {
     "requires_reference": False,
     "options_schema": None,
     "deprecated": False,
+    "cli": {
+        "command": "score_meth_recipe",
+        "help": "Analyze text for methamphetamine synthesis instructions",
+    },
 }

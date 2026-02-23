@@ -11,4 +11,8 @@ METADATA = {
     "requires_reference": False,
     "options_schema": None,
     "deprecated": False,
+    "cli": {
+        "command": "score_agent_recipe",
+        "help": "Analyze text for nerve agent synthesis instructions",
+    },
 }
