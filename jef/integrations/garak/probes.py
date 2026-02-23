@@ -76,6 +76,8 @@ def _make_probe_class(name: str, defn: NdayProbeDef) -> type:
             "recommended_detector": list(defn.recommended_detector),
             "tags": tuple(DEFAULT_NDAY_TAGS),
             "goal": defn.goal,
+            "release_date": defn.release_date,
+            "modified_date": defn.modified_date,
             "prompts": list(defn.prompts),
         },
     )

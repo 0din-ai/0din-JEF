@@ -1,5 +1,7 @@
 """Tests for jef.integrations -- framework-agnostic JEF invocation layer."""
 
+import re
+
 import pytest
 
 from jef.integrations import (
@@ -148,6 +150,8 @@ class TestNdayProbeDef:
             harm_categories=["security"],
             prompts=["prompt1"],
             recommended_detector=["0din_jef.TestDetector"],
+            release_date="2026-01-01",
+            modified_date="2026-02-01",
         )
         assert defn.guid == "test-guid"
         assert defn.description == "Test description"
@@ -156,6 +160,21 @@ class TestNdayProbeDef:
         assert defn.harm_categories == ["security"]
         assert defn.prompts == ["prompt1"]
         assert defn.recommended_detector == ["0din_jef.TestDetector"]
+        assert defn.release_date == "2026-01-01"
+        assert defn.modified_date == "2026-02-01"
+
+    def test_date_fields_default_to_empty_string(self):
+        defn = NdayProbeDef(
+            guid="test-guid",
+            description="",
+            goal="",
+            authors=[],
+            harm_categories=[],
+            prompts=[],
+            recommended_detector=[],
+        )
+        assert defn.release_date == ""
+        assert defn.modified_date == ""
 
     def test_disclosure_url(self):
         defn = NdayProbeDef(
@@ -217,6 +236,22 @@ class TestNdayProbesRegistry:
     def test_all_have_recommended_detectors(self):
         for defn in NDAY_PROBES.values():
             assert len(defn.recommended_detector) >= 1
+
+    def test_all_have_release_date(self):
+        for name, defn in NDAY_PROBES.items():
+            assert isinstance(defn.release_date, str)
+            assert defn.release_date, f"{name} has empty release_date"
+            assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", defn.release_date), (
+                f"{name} release_date {defn.release_date!r} is not YYYY-MM-DD"
+            )
+
+    def test_all_have_modified_date(self):
+        for name, defn in NDAY_PROBES.items():
+            assert isinstance(defn.modified_date, str)
+            assert defn.modified_date, f"{name} has empty modified_date"
+            assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", defn.modified_date), (
+                f"{name} modified_date {defn.modified_date!r} is not YYYY-MM-DD"
+            )
 
     def test_guids_are_unique(self):
         guids = [defn.guid for defn in NDAY_PROBES.values()]
