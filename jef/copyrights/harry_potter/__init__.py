@@ -14,4 +14,16 @@ METADATA = {
     # Kept for API compatibility; fingerprints are now built-in
     "requires_reference": False,
     "options_schema": {},
+    "cli": {
+        "command": "copyright_score_hp",
+        "help": "Check for Harry Potter copyright violations",
+        "extra_args": [
+            {
+                "flags": ["--ref"],
+                "default": "chapter_one",
+                "choices": ["page_one", "chapter_one"],
+                "help": "Built-in reference to compare against (default: chapter_one)",
+            },
+        ],
+    },
 }
