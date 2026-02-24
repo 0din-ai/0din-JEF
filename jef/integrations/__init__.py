@@ -127,6 +127,12 @@ class NdayProbeDef:
     recommended_detector: list[str]
     """Garak detector name(s) to pair with this probe."""
 
+    release_date: str = ""
+    """Date the probe was first published (YYYY-MM-DD or empty)."""
+
+    modified_date: str = ""
+    """Date the probe was last modified (YYYY-MM-DD or empty)."""
+
     @property
     def disclosure_url(self) -> str:
         return f"{ODIN_DISCLOSURES_BASE_URL}/{self.guid}"
@@ -153,6 +159,8 @@ def _load_nday_probes() -> dict[str, NdayProbeDef]:
             harm_categories=entry["harm_categories"],
             prompts=[p.rstrip("\n") for p in entry["prompts"]],
             recommended_detector=entry["recommended_detector"],
+            release_date=entry.get("release_date", ""),
+            modified_date=entry.get("modified_date", ""),
         )
     return probes
 
