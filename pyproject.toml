@@ -14,7 +14,7 @@ authors = [
 [project.optional-dependencies]
 dev = ["pytest", "requests", "pytest-asyncio"]
 garak = ["garak>=0.13.3"]
-pyrit = ["pyrit>=0.13,<0.16"]
+pyrit = ["pyrit>=0.14,<0.15"]
 
 [project.urls]
 Homepage = "https://0din.ai"
