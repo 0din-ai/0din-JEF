@@ -1,0 +1,44 @@
+name: Test Suite
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: core
+            extras: dev
+            pytest_args: ./tests --ignore=tests/integrations/garak --ignore=tests/integrations/pyrit
+          - name: garak
+            extras: dev,garak
+            pytest_args: tests/integrations/garak
+          - name: pyrit
+            extras: dev,pyrit
+            pytest_args: tests/integrations/pyrit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv pip install --system ".[${{ matrix.extras }}]"
+
+      - name: Run tests
+        run: pytest ${{ matrix.pytest_args }}
