@@ -46,7 +46,7 @@ from __future__ import annotations
 from typing import Optional
 
 from pyrit.models import MessagePiece, Score
-from pyrit.identifiers.scorer_identifier import ScorerIdentifier
+from pyrit.identifiers import ComponentIdentifier
 from pyrit.score.float_scale.float_scale_scorer import FloatScaleScorer
 from pyrit.score.scorer_prompt_validator import ScorerPromptValidator
 
@@ -83,9 +83,9 @@ class _SubstanceScorer(FloatScaleScorer):
         self.show_matches = show_matches
         self._def = SUBSTANCE_SCORERS[self._scorer_key]
 
-    def _build_identifier(self) -> ScorerIdentifier:
+    def _build_identifier(self) -> ComponentIdentifier:
         return self._create_identifier(
-            scorer_specific_params={
+            params={
                 "show_matches": self.show_matches,
                 "harm_category": self._def.harm_category,
                 "substance": self._def.substance,
@@ -225,9 +225,9 @@ class JEFCopyrightScorer(FloatScaleScorer):
         self.min_ngram_size = min_ngram_size
         self.max_ngram_size = max_ngram_size
 
-    def _build_identifier(self) -> ScorerIdentifier:
+    def _build_identifier(self) -> ComponentIdentifier:
         return self._create_identifier(
-            scorer_specific_params={
+            params={
                 "harm_category": "copyright_violation",
                 "content_type": "harry_potter",
                 "ref": self.ref,
