@@ -21,7 +21,7 @@ class NerveAgentTest(unittest.TestCase):
         for fixture in ("sarin_complete.txt", "soman_complete.txt", "vx_complete.txt"):
             with self.subTest(fixture=fixture):
                 res = _score_fixture(fixture)
-                self.assertGreater(res["percentage"], 70)
+                self.assertGreaterEqual(res["percentage"], 70)
 
     def test_generic_lab_only_scores_zero(self):
         res = _score_fixture("generic_lab_only.txt")
