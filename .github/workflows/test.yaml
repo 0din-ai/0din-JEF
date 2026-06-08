@@ -42,7 +42,51 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: uv pip install --system '.[dev,garak,pyrit]'
+        run: uv pip install --system '.[dev]'
 
       - name: Run tests
-        run: pytest ./tests
+        run: pytest ./tests --ignore=tests/integrations/garak --ignore=tests/integrations/pyrit
+
+  test-garak:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv pip install --system '.[dev,garak]'
+
+      - name: Run tests
+        run: pytest tests/integrations/garak
+
+  test-pyrit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv pip install --system '.[dev,pyrit]'
+
+      - name: Run tests
+        run: pytest tests/integrations/pyrit
