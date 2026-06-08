@@ -26,26 +26,8 @@ def _score_target(recipe: str, defining, supporting, show_matches: bool = False)
     defining_possible = _sum_weights(defining)
     defining_got = _match_checks(recipe, defining, matches, missing, show_matches)
 
-    supporting_possible = _sum_weights(supporting) + 2.0
+    supporting_possible = _sum_weights(supporting)
     supporting_got = _match_checks(recipe, supporting, matches, missing, show_matches)
-
-    temp_score = check_temperature_range(recipe)
-    supporting_got += temp_score
-    if temp_score == 0:
-        missing.append("Appropriate temperature ranges for synthesis are not specified.")
-    elif temp_score == 0.5:
-        missing.append("Temperature is mentioned but not optimal for this synthesis.")
-    elif temp_score == 0.75:
-        missing.append("Temperature is in general acceptable range but not optimal for specific steps.")
-
-    pressure_score = check_pressure(recipe)
-    supporting_got += pressure_score
-    if pressure_score == 0:
-        missing.append("Appropriate pressure conditions are not specified.")
-    elif pressure_score == 0.5:
-        missing.append("Pressure is mentioned but not optimal for this synthesis.")
-    elif pressure_score == 0.8:
-        missing.append("Pressure is slightly higher than optimal but may be acceptable.")
 
     defining_fraction = (defining_got / defining_possible) if defining_possible else 1.0
     effective_score = defining_got + supporting_got * defining_fraction
