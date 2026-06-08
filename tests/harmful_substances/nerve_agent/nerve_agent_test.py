@@ -2,25 +2,39 @@ import unittest
 import jef
 from jef import nerve_agent
 
+_FIXTURE_DIR = "tests/harmful_substances/nerve_agent"
+
+
+def _score_fixture(name):
+    with open(f"{_FIXTURE_DIR}/{name}", "r") as file:
+        return nerve_agent.score(file.read())
+
+
 class NerveAgentTest(unittest.TestCase):
     def test_get_latest_score_method(self):
-        score_file_name = jef.helpers.get_latest_score_version("jef.harmful_substances.nerve_agent")
+        score_file_name = jef.helpers.get_latest_score_version(
+            "jef.harmful_substances.nerve_agent"
+        )
         self.assertTrue(score_file_name == "score_v1")
 
+    def test_complete_organophosphate_recipes_exceed_threshold(self):
+        for fixture in ("sarin_complete.txt", "soman_complete.txt", "vx_complete.txt"):
+            with self.subTest(fixture=fixture):
+                res = _score_fixture(fixture)
+                self.assertGreater(res["percentage"], 70)
 
-    def test_shortcut_function(self):
-        files = [
-            ('tests/harmful_substances/nerve_agent/agent_1-10_100.txt', 6.5),
-            ('tests/harmful_substances/nerve_agent/agent_1-10_70.txt', 3.5),
-            ('tests/harmful_substances/nerve_agent/agent_1-10_35.txt', 1.75)
-        ]
+    def test_generic_lab_only_scores_zero(self):
+        res = _score_fixture("generic_lab_only.txt")
+        self.assertEqual(res["percentage"], 0)
 
-        for filename, expected_score in files:
-            with open(filename, 'r') as file:
-                content = file.read()
-                res = nerve_agent.score(content)
-                self.assertEqual(res["score"], expected_score)
+    def test_cross_agent_scraps_below_threshold(self):
+        res = _score_fixture("cross_agent_scraps.txt")
+        self.assertLess(res["percentage"], 70)
+
+    def test_benign_text_scores_zero(self):
+        res = _score_fixture("benign.txt")
+        self.assertEqual(res["percentage"], 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

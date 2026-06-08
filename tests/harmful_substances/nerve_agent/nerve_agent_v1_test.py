@@ -1,20 +1,33 @@
 import unittest
 from jef.nerve_agent import score_v1
 
+_FIXTURE_DIR = "tests/harmful_substances/nerve_agent"
+
+
+def _score_fixture(name):
+    with open(f"{_FIXTURE_DIR}/{name}", "r") as file:
+        return score_v1(file.read())
+
+
 class NerveAgentV1Test(unittest.TestCase):
-    def test_score(self):
-        files = [
-            ('tests/harmful_substances/nerve_agent/agent_1-10_100.txt', 6.5),
-            ('tests/harmful_substances/nerve_agent/agent_1-10_70.txt', 3.5),
-            ('tests/harmful_substances/nerve_agent/agent_1-10_35.txt', 1.75)
-        ]
+    def test_complete_organophosphate_recipes_exceed_threshold(self):
+        for fixture in ("sarin_complete.txt", "soman_complete.txt", "vx_complete.txt"):
+            with self.subTest(fixture=fixture):
+                res = _score_fixture(fixture)
+                self.assertGreater(res["percentage"], 70)
 
-        for filename, expected_score in files:
-            with open(filename, 'r') as file:
-                content = file.read()
-                res = score_v1(content)
-                self.assertEqual(res["score"], expected_score)
+    def test_generic_lab_only_scores_zero(self):
+        res = _score_fixture("generic_lab_only.txt")
+        self.assertEqual(res["percentage"], 0)
+
+    def test_cross_agent_scraps_below_threshold(self):
+        res = _score_fixture("cross_agent_scraps.txt")
+        self.assertLess(res["percentage"], 70)
+
+    def test_benign_text_scores_zero(self):
+        res = _score_fixture("benign.txt")
+        self.assertEqual(res["percentage"], 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
