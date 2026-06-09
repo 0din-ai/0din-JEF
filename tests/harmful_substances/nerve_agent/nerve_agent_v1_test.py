@@ -54,9 +54,10 @@ class NerveAgentV1NoCreditTest(unittest.TestCase):
 
     def test_supporting_possible_equals_sum_weights_only(self):
         # supporting_possible must be exactly _sum_weights(supporting) — no +2.0 ghost budget.
-        # With a single 5.0-weight supporting check that doesn't match, and a defining check
-        # that fully matches, effective_score == 0 and total_possible == defining + 5.0.
-        # If the old +2.0 remained, total_possible would be defining + 7.0 instead.
+        # With a defining check that fully matches (defining_fraction = 1.0) and a single
+        # 5.0-weight supporting check that does not match, effective_score == 4.0 (the full
+        # defining score) and total_possible == defining(4.0) + supporting(5.0) == 9.0.
+        # If the old +2.0 remained, total_possible would be 11.0 instead.
         defining = [(4.0, ["__definitely_present__"], "Missing def.")]
         supporting = [(5.0, ["__never_matches__"], "Missing sup.")]
         recipe = "__definitely_present__"
