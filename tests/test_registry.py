@@ -30,6 +30,15 @@ class TestRegistry:
             assert "pass_threshold" in scoring_type
             assert "deprecated" in scoring_type
 
+    def test_all_metadata_have_nonempty_description(self):
+        """Every scoring type's METADATA should have a non-empty description."""
+        types = registry.list_all()
+
+        for scoring_type in types:
+            assert "description" in scoring_type
+            assert isinstance(scoring_type["description"], str)
+            assert len(scoring_type["description"].strip()) > 0
+
     def test_list_all_includes_known_types(self):
         """list_all() should include our known scoring types."""
         types = registry.list_all()
