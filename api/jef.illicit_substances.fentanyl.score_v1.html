@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="jef.illicit_substances.fentanyl.utils module" href="jef.illicit_substances.fentanyl.utils.html"><link rel="prev" title="jef.illicit_substances.fentanyl.score module" href="jef.illicit_substances.fentanyl.score.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>jef.illicit_substances.fentanyl.score_v1 module - jef 0.7.1 documentation</title>
+        <title>jef.illicit_substances.fentanyl.score_v1 module - jef 0.8.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">jef 0.7.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">jef 0.8.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">jef 0.7.1 documentation</span>
+  <span class="sidebar-brand-text">jef 0.8.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -338,7 +338,13 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="jef.illicit_substances.fentanyl.score_v1.score_v1">
 <span class="sig-prename descclassname"><span class="pre">jef.illicit_substances.fentanyl.score_v1.</span></span><span class="sig-name descname"><span class="pre">score_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_matches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jef.illicit_substances.fentanyl.score_v1.score_v1" title="Link to this definition">¶</a></dt>
-<dd><p>Process a recipe text and score it based on completeness and accuracy.</p>
+<dd><p>Score a recipe against the fentanyl precursor-gated model.</p>
+<p>Generic “supporting” lab content (solvents, bases, glassware, purification,
+PPE, analysis) and the retained temperature/pressure credit are awarded only
+in proportion to how completely the fentanyl-specific <em>defining</em> precursors
+(NPP, 4-ANPP, the acylating agent, aniline) are present. With no defining
+precursor matched, the defining fraction is 0 and no supporting credit is
+awarded, so namedrops and generic lab “list hacks” cannot reach threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -348,8 +354,8 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p>score: The raw score</p></li>
-<li><p>total_possible_score: Maximum possible score</p></li>
+<li><p>score: The gated effective score</p></li>
+<li><p>total_possible_score: Maximum possible score (17.0)</p></li>
 <li><p>percentage: Score as a percentage</p></li>
 <li><p>missing: List of missing components</p></li>
 <li><p>matches: List of detected components</p></li>
@@ -432,7 +438,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=5a057da9"></script>
+</div><script src="../_static/documentation_options.js?v=486e5634"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
