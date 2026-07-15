@@ -1,0 +1,39 @@
+# Dependabot configuration.
+#
+# `uv` is a first-class Dependabot ecosystem distinct from `pip` (GitHub added
+# dedicated uv support: https://docs.github.com/en/code-security/dependabot/
+# working-with-dependabot/dependabot-options-reference#package-ecosystem-).
+# This repo is pyproject.toml-only, managed with uv, with no committed
+# requirements.txt/poetry.lock — `uv` is the correct ecosystem value here,
+# not `pip`.
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      patch-updates:
+        update-types:
+          - "patch"
+      minor-updates:
+        update-types:
+          - "minor"
+
+  # Keeps the SHA-pinned `# vX.Y.Z` trailing comments in our workflows current
+  # by opening PRs that bump both the pin and its version comment.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      patch-updates:
+        update-types:
+          - "patch"
+      minor-updates:
+        update-types:
+          - "minor"
