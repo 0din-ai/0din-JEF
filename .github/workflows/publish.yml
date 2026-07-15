@@ -62,6 +62,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.release.outputs.tag }}
 
+  sbom:
+    needs: release
+    if: needs.release.outputs.released == 'true'
+    permissions:
+      contents: write
+    uses: mozilla/ssdlc-actions/.github/workflows/ssdlc-sbom.yml@d355de9a0cb79e0be2599696064231ee49aebb92 # main HEAD @ 2026-07-15
+    with:
+      sbom_name: 0din-jef
+
   docs:
     needs: release
     if: needs.release.outputs.released == 'true'
