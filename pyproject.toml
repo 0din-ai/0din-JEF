@@ -12,7 +12,7 @@ authors = [
 
 
 [project.optional-dependencies]
-dev = ["pytest", "requests", "pytest-asyncio"]
+dev = ["pytest", "requests>=2.33.0", "pytest-asyncio"]
 garak = ["garak>=0.13.3"]
 pyrit = ["pyrit>=0.14,<0.15"]
 
