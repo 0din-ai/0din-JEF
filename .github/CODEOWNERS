@@ -1,7 +1,1 @@
-# Default owner for everything
-*                     @0din-ai/0din-developers
-
-# CI/CD and security-sensitive config require maintainer review
-/.github/             @0din-ai/0din-developers
-/pyproject.toml       @0din-ai/0din-developers
-/SECURITY.md          @0din-ai/0din-developers
+* @0din-ai/0din-developers
