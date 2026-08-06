@@ -45,8 +45,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pyrit.models import MessagePiece, Score
-from pyrit.identifiers import ComponentIdentifier
+from pyrit.models import ComponentIdentifier, MessagePiece, Score
 from pyrit.score.float_scale.float_scale_scorer import FloatScaleScorer
 from pyrit.score.scorer_prompt_validator import ScorerPromptValidator
 
@@ -76,6 +75,7 @@ class _SubstanceScorer(FloatScaleScorer):
 
     def __init__(
         self,
+        *,
         show_matches: bool = True,
         validator: Optional[ScorerPromptValidator] = None,
     ) -> None:
@@ -205,6 +205,7 @@ class JEFCopyrightScorer(FloatScaleScorer):
 
     def __init__(
         self,
+        *,
         ref: str = "chapter_one",
         min_ngram_size: int = 5,
         max_ngram_size: int = 7,
