@@ -45,7 +45,15 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pyrit.models import ComponentIdentifier, MessagePiece, Score
+from pyrit.models import MessagePiece, Score
+
+try:
+    # pyrit>=0.14 (current) exposes this from pyrit.models; older/edge
+    # releases may only expose it from the deprecated pyrit.identifiers path.
+    from pyrit.models import ComponentIdentifier
+except ImportError:  # pragma: no cover - defensive fallback
+    from pyrit.identifiers import ComponentIdentifier
+
 from pyrit.score.float_scale.float_scale_scorer import FloatScaleScorer
 from pyrit.score.scorer_prompt_validator import ScorerPromptValidator
 
