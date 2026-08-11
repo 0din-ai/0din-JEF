@@ -33,5 +33,3 @@ def check_temperature_range(input_text: str) -> float:
 
     # If we found temperatures but none in range, return half score
     return 0.5
-
-
