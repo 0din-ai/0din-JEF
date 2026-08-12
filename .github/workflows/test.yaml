@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup Python
-        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
@@ -58,4 +58,4 @@ jobs:
       contents: read
       security-events: write
       actions: read
-    uses: mozilla/ssdlc-actions/.github/workflows/code-security-analysis-public-repo.yml@d355de9a0cb79e0be2599696064231ee49aebb92 # main HEAD @ 2026-07-15
+    uses: mozilla/ssdlc-actions/.github/workflows/code-security-analysis-public-repo.yml@aa759c845c83060e2473fd8df60f9f408e34675d # main HEAD @ 2026-07-15
