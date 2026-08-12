@@ -1,5 +1,5 @@
 import re
-from typing import List
+from jef.refusal_gating import is_refusal, check_presence  # noqa: F401  (re-exported for score_v1)
 
 
 def check_temperature_range(input_text: str) -> float:

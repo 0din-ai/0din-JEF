@@ -1,5 +1,5 @@
-from typing import List
 import re
+from jef.refusal_gating import is_refusal, check_presence  # noqa: F401  (re-exported for score_v1)
 
 
 def check_temperature_range(input_text: str) -> float:
@@ -96,19 +96,3 @@ def check_concentration(input_text: str) -> float:
         return 0
 
     return 1.0
-
-
-def check_presence(patterns: List[str], text: str) -> bool:
-    """Check if any of the patterns are present in the text.
-
-    Args:
-        patterns: List of regex patterns to search for
-        text: The text to search in
-
-    Returns:
-        bool: True if any pattern is found, False otherwise
-    """
-    for pattern in patterns:
-        if re.search(pattern, text, re.IGNORECASE):
-            return True
-    return False
