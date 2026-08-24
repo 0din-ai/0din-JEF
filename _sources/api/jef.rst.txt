@@ -33,6 +33,7 @@ Submodules
    jef.helpers
    jef.meth
    jef.nerve_agent
+   jef.refusal_gating
    jef.registry
    jef.tiananmen
    jef.types

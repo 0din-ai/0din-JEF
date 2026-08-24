@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="JEF Framework" href="framework.html"><link rel="prev" title="Getting Started" href="getting-started.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Red-Teaming Integrations - jef 0.8.1 documentation</title>
+        <title>Red-Teaming Integrations - jef 0.8.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">jef 0.8.1 documentation</div></a>
+      <a href="index.html"><div class="brand">jef 0.8.3 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">jef 0.8.1 documentation</span>
+  <span class="sidebar-brand-text">jef 0.8.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -290,6 +290,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/jef.helpers.html">jef.helpers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.meth.html">jef.meth module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.nerve_agent.html">jef.nerve_agent module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/jef.refusal_gating.html">jef.refusal_gating module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.registry.html">jef.registry module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.tiananmen.html">jef.tiananmen module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.types.html">jef.types module</a></li>
@@ -458,11 +459,11 @@ garak<span class="w"> </span>--model_type<span class="w"> </span>openai<span cla
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">garak._plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_plugin</span>
 
 <span class="c1"># Load a detector</span>
-<span class="n">detector</span> <span class="o">=</span> <span class="n">load_plugin</span><span class="p">(</span><span class="s2">&quot;detectors.0din_jef.CrystalMethScore&quot;</span><span class="p">)</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="n">load_plugin</span><span class="p">(</span><span class="s2">"detectors.0din_jef.CrystalMethScore"</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">detector</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">attempt</span><span class="p">)</span>  <span class="c1"># list[float] in 0.0-1.0</span>
 
 <span class="c1"># Load a probe</span>
-<span class="n">probe</span> <span class="o">=</span> <span class="n">load_plugin</span><span class="p">(</span><span class="s2">&quot;probes.0din_jef.PlaceholderInjection&quot;</span><span class="p">)</span>
+<span class="n">probe</span> <span class="o">=</span> <span class="n">load_plugin</span><span class="p">(</span><span class="s2">"probes.0din_jef.PlaceholderInjection"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">probe</span><span class="o">.</span><span class="n">prompts</span><span class="p">)</span>        <span class="c1"># attack prompt strings</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">probe</span><span class="o">.</span><span class="n">goal</span><span class="p">)</span>           <span class="c1"># short goal statement</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">probe</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span>            <span class="c1"># 0DIN disclosure URL</span>
@@ -531,7 +532,7 @@ in PyRIT’s <code class="docutils literal notranslate"><span class="pre">0.0</s
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef.integrations.pyrit.scorers</span><span class="w"> </span><span class="kn">import</span> <span class="n">JEFMethScorer</span>
 
 <span class="n">scorer</span> <span class="o">=</span> <span class="n">JEFMethScorer</span><span class="p">()</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score_text_async</span><span class="p">(</span><span class="s2">&quot;some LLM output&quot;</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score_text_async</span><span class="p">(</span><span class="s2">"some LLM output"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>  <span class="c1"># float in 0.0-1.0</span>
 </pre></div>
 </div>
@@ -539,11 +540,11 @@ in PyRIT’s <code class="docutils literal notranslate"><span class="pre">0.0</s
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef.integrations.pyrit.scorers</span><span class="w"> </span><span class="kn">import</span> <span class="n">JEFCopyrightScorer</span>
 
 <span class="n">scorer</span> <span class="o">=</span> <span class="n">JEFCopyrightScorer</span><span class="p">(</span>
-    <span class="n">ref</span><span class="o">=</span><span class="s2">&quot;page_one&quot;</span><span class="p">,</span>       <span class="c1"># or &quot;chapter_one&quot; (default)</span>
+    <span class="n">ref</span><span class="o">=</span><span class="s2">"page_one"</span><span class="p">,</span>       <span class="c1"># or "chapter_one" (default)</span>
     <span class="n">min_ngram_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="n">max_ngram_size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score_text_async</span><span class="p">(</span><span class="s2">&quot;some LLM output&quot;</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score_text_async</span><span class="p">(</span><span class="s2">"some LLM output"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -555,7 +556,7 @@ YAML files loadable via <code class="docutils literal notranslate"><span class="
 <span class="kn">from</span><span class="w"> </span><span class="nn">jef.integrations.pyrit.seeds</span><span class="w"> </span><span class="kn">import</span> <span class="n">SEEDS_DIR</span>
 
 <span class="c1"># Load the PlaceholderInjection seed dataset</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">SeedDataset</span><span class="o">.</span><span class="n">from_yaml_file</span><span class="p">(</span><span class="n">SEEDS_DIR</span> <span class="o">/</span> <span class="s2">&quot;placeholder_injection.yaml&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SeedDataset</span><span class="o">.</span><span class="n">from_yaml_file</span><span class="p">(</span><span class="n">SEEDS_DIR</span> <span class="o">/</span> <span class="s2">"placeholder_injection.yaml"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">seeds</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">seed</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
@@ -686,7 +687,7 @@ automatically at import time</p></li>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=ec16d22d"></script>
+</div><script src="_static/documentation_options.js?v=7f96dc5e"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

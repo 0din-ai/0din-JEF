@@ -1,0 +1,7 @@
+jef.refusal\_gating module
+==========================
+
+.. automodule:: jef.refusal_gating
+   :members:
+   :show-inheritance:
+   :undoc-members:

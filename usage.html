@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="jef package" href="api/jef.html"><link rel="prev" title="JEF Framework" href="framework.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Usage Guide - jef 0.8.1 documentation</title>
+        <title>Usage Guide - jef 0.8.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">jef 0.8.1 documentation</div></a>
+      <a href="index.html"><div class="brand">jef 0.8.3 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">jef 0.8.1 documentation</span>
+  <span class="sidebar-brand-text">jef 0.8.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -290,6 +290,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/jef.helpers.html">jef.helpers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.meth.html">jef.meth module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.nerve_agent.html">jef.nerve_agent module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/jef.refusal_gating.html">jef.refusal_gating module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.registry.html">jef.registry module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.tiananmen.html">jef.tiananmen module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/jef.types.html">jef.types module</a></li>
@@ -357,7 +358,7 @@ Each scorer accepts text and returns a typed result object with a score out of 1
 crackdown.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">tiananmen</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">tiananmen</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">tiananmen</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"Some LLM response text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; ScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -367,7 +368,7 @@ crackdown.</p>
 <p>Scores text against synthesis details and procedural accuracy for harmful nerve agents.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">nerve_agent</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">nerve_agent</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">nerve_agent</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"Some LLM response text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; ScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -378,7 +379,7 @@ crackdown.</p>
 methamphetamine.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">meth</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"Some LLM response text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; ScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -388,7 +389,7 @@ methamphetamine.</p>
 <p>Scores text against synthesis details and procedural correctness for fentanyl.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">fentanyl</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">fentanyl</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">fentanyl</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"Some LLM response text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; ScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -399,7 +400,7 @@ methamphetamine.</p>
 radiological, and nuclear materials).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">anthrax</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">anthrax</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">anthrax</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"Some LLM response text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; ScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -409,7 +410,7 @@ radiological, and nuclear materials).</p>
 <p>Scores text against CRISPR gene editing techniques and procedures.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">crispr</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">crispr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;Some LLM response text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">crispr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"Some LLM response text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; ScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -420,7 +421,7 @@ radiological, and nuclear materials).</p>
 text is automatically truncated if its length exceeds twice that of the reference.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">harry_potter</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">harry_potter</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;LLM output text&quot;</span><span class="p">,</span> <span class="s2">&quot;harry potter reference text&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">harry_potter</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"LLM output text"</span><span class="p">,</span> <span class="s2">"harry potter reference text"</span><span class="p">)</span>
 <span class="c1"># result -&gt; CopyrightScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -431,7 +432,7 @@ text is automatically truncated if its length exceeds twice that of the referenc
 automatically truncated if its length exceeds twice that of the reference.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jef</span><span class="w"> </span><span class="kn">import</span> <span class="n">copyrights</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">copyrights</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">&quot;LLM output text&quot;</span><span class="p">,</span> <span class="s2">&quot;reference text to compare against&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">copyrights</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="s2">"LLM output text"</span><span class="p">,</span> <span class="s2">"reference text to compare against"</span><span class="p">)</span>
 <span class="c1"># result -&gt; CopyrightScoreType, max score 100</span>
 </pre></div>
 </div>
@@ -568,7 +569,7 @@ tactic. See <a class="reference internal" href="framework.html"><span class="doc
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=ec16d22d"></script>
+</div><script src="_static/documentation_options.js?v=7f96dc5e"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
