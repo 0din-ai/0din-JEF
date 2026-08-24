@@ -49,6 +49,7 @@ version_toml = []
 version_variables = []
 tag_format = "v{version}"
 commit_parser = "conventional"
+allow_zero_version = true  # Stay on 0.x until we deliberately choose to graduate to 1.0.0
 major_on_zero = false  # Don't bump to 1.0.0 on breaking changes while < 1.0
 
 [tool.semantic_release.branches.main]
