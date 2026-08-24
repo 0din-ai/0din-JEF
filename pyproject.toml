@@ -51,6 +51,11 @@ tag_format = "v{version}"
 commit_parser = "conventional"
 allow_zero_version = true  # Stay on 0.x until we deliberately choose to graduate to 1.0.0
 major_on_zero = false  # Don't bump to 1.0.0 on breaking changes while < 1.0
+# Build dist/ ourselves, in-process, right after PSR computes the version and
+# before it tags. setuptools-scm can't see a tag PSR hasn't created yet, so we
+# pin the version explicitly via PSR's own NEW_VERSION instead of racing a
+# `git fetch` against tag creation.
+build_command = "python -m pip install --upgrade build && SETUPTOOLS_SCM_PRETEND_VERSION=$NEW_VERSION python -m build"
 
 [tool.semantic_release.branches.main]
 match = "(main|master)"
