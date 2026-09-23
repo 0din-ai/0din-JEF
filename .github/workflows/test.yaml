@@ -58,4 +58,4 @@ jobs:
       contents: read
       security-events: write
       actions: read
-    uses: mozilla/ssdlc-actions/.github/workflows/code-security-analysis-public-repo.yml@aa759c845c83060e2473fd8df60f9f408e34675d # main HEAD @ 2026-07-15
+    uses: mozilla/ssdlc-actions/.github/workflows/code-security-analysis-public-repo.yml@5e1ea380f75b02891de776dcc00e74ad7cfeca9c # main HEAD @ 2026-07-15
