@@ -15,12 +15,11 @@ updates:
     cooldown:
       default-days: 7
     groups:
-      patch-updates:
-        update-types:
-          - "patch"
-      minor-updates:
+      non-major-updates:
+        applies-to: version-updates
         update-types:
           - "minor"
+          - "patch"
 
   # Keeps the SHA-pinned `# vX.Y.Z` trailing comments in our workflows current
   # by opening PRs that bump both the pin and its version comment.
@@ -31,9 +30,8 @@ updates:
     cooldown:
       default-days: 7
     groups:
-      patch-updates:
-        update-types:
-          - "patch"
-      minor-updates:
+      non-major-updates:
+        applies-to: version-updates
         update-types:
           - "minor"
+          - "patch"
